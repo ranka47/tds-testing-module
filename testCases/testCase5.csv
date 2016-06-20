@@ -1,0 +1,10 @@
+constant;nonIndex;sk
+constant;pk;sk
+constant;pk;vindexUnique
+constant;secIndex;sk
+constant;secIndex;vindexUnique
+expression;nonIndex;sk
+expression;pk;sk
+expression;pk;vindexUnique
+expression;secIndex;sk
+expression;secIndex;vindexUnique

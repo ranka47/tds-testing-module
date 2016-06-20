@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="clearTxnl" enabled="true">
+      <stringProp name="TestPlan.comments">testCase1: select [returnColumns, | * ] from tableName [where where_exp_with_and]</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CHARLIST" elementType="Argument">
+            <stringProp name="Argument.name">CHARLIST</stringProp>
+            <stringProp name="Argument.value">&quot;abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INTEGER" elementType="Argument">
+            <stringProp name="Argument.name">INTEGER</stringProp>
+            <stringProp name="Argument.value">0123456789</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_THREADS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(threads,16)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
+            <stringProp name="Argument.value">${__P(datasize,100)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MACHINE" elementType="Argument">
+            <stringProp name="Argument.name">MACHINE</stringProp>
+            <stringProp name="Argument.value">cluster</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DBNAME" elementType="Argument">
+            <stringProp name="Argument.name">DBNAME</stringProp>
+            <stringProp name="Argument.value">shipment</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTGIVEN" elementType="Argument">
+            <stringProp name="Argument.name">INPUTGIVEN</stringProp>
+            <stringProp name="Argument.value">${__P(inputgive,y)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTFILE" elementType="Argument">
+            <stringProp name="Argument.name">INPUTFILE</stringProp>
+            <stringProp name="Argument.value">${__P(inputfile,tmp/tables.csv)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtTxnl.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_SEC" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_SEC</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtSec.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VSCHEMAFILE" elementType="Argument">
+            <stringProp name="Argument.name">VSCHEMAFILE</stringProp>
+            <stringProp name="Argument.value">&quot;shipmentVSchema.json&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIGINT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIGINT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">63</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TINYINT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">TINYINT_RANGE</stringProp>
+            <stringProp name="Argument.value">256</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">INT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">31</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREFIX_STRING" elementType="Argument">
+            <stringProp name="Argument.name">PREFIX_STRING</stringProp>
+            <stringProp name="Argument.value">&quot;TestData&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1970-01-01 00:00:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 23:59:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1969-12-31 18:30:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 18:29:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_ACCU" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_ACCU</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IST_TO_UTC" elementType="Argument">
+            <stringProp name="Argument.name">IST_TO_UTC</stringProp>
+            <stringProp name="Argument.value">-19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="UTC_TO_IST" elementType="Argument">
+            <stringProp name="Argument.name">UTC_TO_IST</stringProp>
+            <stringProp name="Argument.value">19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX</stringProp>
+            <stringProp name="Argument.value">&quot;vindex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEC_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">SEC_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;secIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NON_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">NON_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;nonIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PRIMARYKEY" elementType="Argument">
+            <stringProp name="Argument.name">PRIMARYKEY</stringProp>
+            <stringProp name="Argument.value">&quot;pk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SHARDINGKEY" elementType="Argument">
+            <stringProp name="Argument.name">SHARDINGKEY</stringProp>
+            <stringProp name="Argument.value">&quot;sk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TRANSACTIONAL" elementType="Argument">
+            <stringProp name="Argument.name">TRANSACTIONAL</stringProp>
+            <stringProp name="Argument.value">&quot;txnl&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="local" enabled="true">
+        <stringProp name="dataSource">local</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select 1</stringProp>
+        <stringProp name="dbUrl">jdbc:mysql://localhost:3306/test</stringProp>
+        <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
+        <stringProp name="username">root</stringProp>
+        <stringProp name="password">root</stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Transactional Data Store" enabled="true">
+        <stringProp name="dataSource">txnl</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">false</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=master</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Secondary Data Store" enabled="true">
+        <stringProp name="dataSource">sec</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select * from dummy</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=archival</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Cluster" enabled="true">
+        <stringProp name="dataSource">cluster</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=txnl</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="vSchema" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1465147238000</longProp>
+        <longProp name="ThreadGroup.end_time">1465147238000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="init" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">bsh.shared.tableMetaData = new HashMap();
+bsh.shared.insertResult = new HashMap();
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="vschemaExtractor" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+/*
+ * Sharing Key Index Type ArrayList
+ */
+shardingKeyIndexType = new ArrayList();
+shardingKeyIndexType.add(&quot;hash&quot;);
+shardingKeyIndexType.add(&quot;binarymd5&quot;);
+shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
+
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
+
+String tableName = &quot;&quot;;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(new FileReader(${VSCHEMAFILE}));
+JSONObject jsonObject = (JSONObject) obj;
+JSONObject shardingKey = new JSONObject();
+
+vindex = new HashMap();
+vindexUnique = new HashMap();
+
+boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
+JSONObject tables = jsonObject.get(&quot;tables&quot;);
+JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
+Iterator keys = tables.keySet().iterator();
+
+getColumnVindexes(JSONObject tableDetails){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
+//			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
+		}
+		else{
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+    }
+    
+}
+
+if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;n&quot;)){
+	while(keys.hasNext()) {
+		tableName = (String)keys.next();
+	/*	if(tableName.equals(&quot;test_one&quot;) || tableName.equals(&quot;test_two&quot;) || tableName.equals(&quot;runsheet_shipments&quot;)){
+			continue;
+		}
+	*/	
+	    	getColumnVindexes(tables.get(tableName));
+	}
+}
+else if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;y&quot;)){
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	try{
+		br = new BufferedReader(new FileReader(vars.get(&quot;INPUTFILE&quot;)));
+		while((line = br.readLine()) != null){
+			tableName = line;
+			getColumnVindexes(tables.get(tableName));	
+		}
+	}
+	catch(Exception e){
+		System.out.println(e.getMessage());
+		log.error(e.getMessage());
+	}
+	
+}
+else{
+	System.out.println(&quot;Argument for option: inputgiven is not valid!&quot;);
+}
+bsh.shared.shardingKey = shardingKey;
+System.out.println(&quot;SKs &quot; + shardingKey);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="extractMetaData" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+Random rand = new Random();
+
+generateColNameList(int colCount, HashMap colLevel){
+	colNameList = new ArrayList(colCount);
+	for(int i=0; i&lt;colCount;i++){
+		colNameList.add(null);
+	}
+	for(String colName: colLevel.keySet()){
+		colNameList.set(colLevel.get(colName).get(&quot;ColumnNumber&quot;) - 1, colName);
+	}
+	return colNameList;
+}
+
+getPrimaryKeys(ResultSet rspk){
+	pk = new ArrayList();
+	while(rspk.next()){
+		try{
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));	
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int i=pk.size(); i&lt;rspk.getInt(&quot;KEY_SEQ&quot;); i++){
+				pk.add(null);
+			}
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));
+			//System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+		catch(Exception e){
+			System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+	}
+	return pk;
+}
+
+printResultSet(ResultSet rs){
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int colCount = rsmd.getColumnCount();
+	while(rs.next()){
+		for (int i = 1; i &lt;= colCount; i++) {
+	        if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	
+	    }
+	        System.out.println(&quot;\n&quot;);
+	}
+}
+
+Connection conn;
+try{
+	String tableName = null; 
+	String shardingKey = null; 
+	
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+	System.out.println(&quot;Connection established!&quot;);
+	
+	DatabaseMetaData dbmd = conn.getMetaData();
+
+	for(String tN: bsh.shared.shardingKey.keySet()){
+		tableName = tN;
+		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
+		tableMetaData = bsh.shared.tableMetaData;
+		colLevel = new HashMap();
+		int colCount = 0;	
+		colNames = new ArrayList();
+		colTypes = new ArrayList();
+//		printResultSet(rs);	
+		System.out.println(&quot;--------------------&quot;+tableName+ &quot;--------------------&quot;);
+		
+		while(rs.next()){
+
+//Always declare new HashMap else use remove() method of hashMap. Because if clear() method is used then the element last added
+//will get copied as many times as the number of elements in colList due to addition of reference in the colList in add() method. 
+			int index = rs.getInt(&quot;ORDINAL_POSITION&quot;) - 1;
+			try{
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(IndexOutOfBoundsException e){
+				for(int i=colNames.size(); i&lt;=index; i++){
+					colNames.add(null);
+					colTypes.add(null);
+				}
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(Exception e){
+				System.out.println(&quot;Error: &quot; + e.getMessage());
+			}
+			colCount++;
+		}
+		tableLevel = new HashMap();
+		tableLevel.put(&quot;ColNames&quot;, colNames);
+		tableLevel.put(&quot;ColTypes&quot;, colTypes);
+		tableLevel.put(&quot;ColCount&quot;, colCount);		
+		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
+
+		ResultSet rspk = dbmd.getPrimaryKeys(vars.get(&quot;DBNAME&quot;), null, tableName);		
+///		printResultSet(rspk);
+		ArrayList pk = getPrimaryKeys(rspk);
+		tableLevel.put(${PRIMARYKEY}, pk);
+
+		tableMetaData.put(tableName,tableLevel);
+		bsh.shared.tableMetaData = tableMetaData;
+	}
+
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess=false;
+}
+finally{
+	conn.close();
+	System.out.println(&quot;Connection closed!&quot;);
+}
+//System.out.println(&quot;metaData &quot; + bsh.shared.tableMetaData);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="clear" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1467181022000</longProp>
+        <longProp name="ThreadGroup.end_time">1467181022000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="clear" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.BigInteger;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.sql.Timestamp;
+
+String tableName = &quot;&quot;;
+//System.out.println(&quot;--------------------\nClear Phase Start\n--------------------\n&quot;);
+response = &quot;&quot;;
+PreparedStatement stmt = null;
+String sql = null;
+colListIndex = new ArrayList();
+dataTypeList = new ArrayList();
+tableMetaData = bsh.shared.tableMetaData;
+
+generateColList(){
+	colList = new HashSet();
+	colList.add(tableMetaData.get(tableName).get(${SHARDINGKEY}));
+	colList.addAll(tableMetaData.get(tableName).get(${PRIMARYKEY}));
+	return colList;
+}
+
+prepareStmtSkeleton(ArrayList colList){
+	String initial = &quot;delete from &quot;+ tableName + &quot; where &quot;;
+	String params = &quot;&quot;;
+	
+	for(int i=0; i&lt;colList.size(); i++){
+		params = params + colList.get(i) + &quot;=? and &quot;; 
+	}
+	
+	params = params.substring(0, params.length()-5);
+
+	return initial + params;
+}
+
+setData(int count, String dataType, int index, int place){
+	/*
+	 * Indexing for place in PreparedStatement starts from 1. Thus place++
+	 */
+	place++;
+	switch(dataType){
+     	case &quot;BIGINT&quot;:
+     		stmt.setLong(place, count);
+        		break;
+		case &quot;INT&quot;:
+        		stmt.setInt(place, count);
+        		break;
+        	case &quot;BIT&quot;:
+        		stmt.setInt(place, 0);
+        		break;
+        	case &quot;TINYINT&quot;:
+        		stmt.setInt(place, 255);
+        		break;
+		case &quot;VARCHAR&quot;:
+        	  	stmt.setString(place, ${PREFIX_STRING} + count);
+        		break;
+        	case &quot;DATETIME&quot;:
+            	stmt.setTimestamp(place, Timestamp.valueOf(${DATETIME_MIN_IST}));
+        		break;
+        	default:
+        		System.out.println(&quot;Missing case for data type in setData function: &quot; + dataType);
+    }
+}
+processResultSet(ResultSet result, ArrayList returnCols){
+	ResultSetMetaData rsmd = result.getMetaData();
+//	System.out.println(&quot;ReturnCols: &quot; + returnCols);
+     int columnCount = rsmd.getColumnCount();
+//	System.out.println(&quot;ColCount: &quot; + columnCount);
+//	System.out.println(&quot;TableName &quot; + tableName);
+     rows = new ArrayList();
+     while(result.next()){
+     	row = new ArrayList();
+          int i=1;
+          for(i=1; i&lt;=columnCount; i++){
+          	row.add(null);
+          }
+          i=1;
+        	boolean valid = true;
+        	while(i&lt;=columnCount){
+			String colName = rsmd.getColumnName(i);
+			if(result.getObject(i) != null){
+	              	row.set(returnCols.indexOf(colName), result.getString(i));
+			}
+               else{
+               	row.set(returnCols.indexOf(colName), null);
+               }
+               i++;
+		}
+          if(valid){
+          	rows.add(row);
+          }
+	}
+     return rows;
+}
+
+Connection txnl = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+Statement stmtTxnl = txnl.createStatement();
+
+ArrayList rowsTxnl;
+
+String line = &quot;&quot;;
+int count = 0;
+results = new ArrayList();
+for(String tN: tableMetaData.keySet()){
+	try{
+        	tableName = tN;
+        	colList = new ArrayList(generateColList());
+		if(colList.isEmpty()){
+			continue;
+		}
+		sql = prepareStmtSkeleton(colList);	
+		stmt = txnl.prepareStatement(sql);
+//		System.out.println(sql);	
+		colListIndex.clear();
+		dataTypeList.clear();
+		
+		for(String colName: colList){
+			colListIndex.add(tableMetaData.get(tableName).get(&quot;ColNames&quot;).indexOf(colName));
+		}
+		
+		for(int index: colListIndex){
+			dataTypeList.add(tableMetaData.get(tableName).get(&quot;ColTypes&quot;).get(index));
+		}
+		
+        	System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
+		for(int i=0; i&lt;${NUM_OF_TESTROWS}; i++){
+			int place=0;
+//			if(i%100 == 0){
+//				System.out.println(i);
+//			}				
+			for(; place&lt;dataTypeList.size(); place++){
+//				System.out.println(&quot;Setting data: &quot; + ((${__threadNum}-1)*${NUM_OF_TESTROWS} + i) + &quot; for column &quot; + colList.get(place));
+				setData((${__threadNum}-1)*${NUM_OF_TESTROWS} + i, dataTypeList.get(place), colListIndex.get(place), place);
+			}
+			stmt.executeUpdate();
+		}
+	}
+    	catch(Exception e){
+        	System.out.println(&quot;Error: &quot; + e);
+//      	e.printStackTrace();
+        	IsSuccess = false;
+        	count++;
+        	results.add(false);
+    	}
+}
+stmtTxnl.close();
+txnl.close();
+for(int i=0; i&lt;results.size();i++){
+    IsSuccess = IsSuccess &amp;&amp; results.get(i);
+    response = response.concat(&quot;Query &quot;+i+&quot;:&quot;+results.get(i)+&quot;\n&quot;);
+    System.out.println(&quot;Query &quot;+i+&quot;:&quot;+results.get(i));
+}
+
+//System.out.println(&quot;--------------------\nClear Phase Completed\n--------------------\n&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

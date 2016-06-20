@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="pInsert" enabled="true">
+      <stringProp name="TestPlan.comments">testCase1: select [returnColumns, | * ] from tableName [where where_exp_with_and]</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CHARLIST" elementType="Argument">
+            <stringProp name="Argument.name">CHARLIST</stringProp>
+            <stringProp name="Argument.value">&quot;abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INTEGER" elementType="Argument">
+            <stringProp name="Argument.name">INTEGER</stringProp>
+            <stringProp name="Argument.value">0123456789</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_THREADS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(threads,16)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
+            <stringProp name="Argument.value">${__P(datasize,100)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MACHINE" elementType="Argument">
+            <stringProp name="Argument.name">MACHINE</stringProp>
+            <stringProp name="Argument.value">cluster</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DBNAME" elementType="Argument">
+            <stringProp name="Argument.name">DBNAME</stringProp>
+            <stringProp name="Argument.value">shipment</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTGIVEN" elementType="Argument">
+            <stringProp name="Argument.name">INPUTGIVEN</stringProp>
+            <stringProp name="Argument.value">y</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTFILE" elementType="Argument">
+            <stringProp name="Argument.name">INPUTFILE</stringProp>
+            <stringProp name="Argument.value">${__P(inputfile,tmp/tables.csv)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtTxnl.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_SEC" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_SEC</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtSec.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VSCHEMAFILE" elementType="Argument">
+            <stringProp name="Argument.name">VSCHEMAFILE</stringProp>
+            <stringProp name="Argument.value">&quot;shipmentVSchema.json&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIGINT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIGINT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">63</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TINYINT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">TINYINT_RANGE</stringProp>
+            <stringProp name="Argument.value">256</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">INT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">31</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREFIX_STRING" elementType="Argument">
+            <stringProp name="Argument.name">PREFIX_STRING</stringProp>
+            <stringProp name="Argument.value">&quot;TestData&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1970-01-01 00:00:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 23:59:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1969-12-31 18:30:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 18:29:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_ACCU" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_ACCU</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IST_TO_UTC" elementType="Argument">
+            <stringProp name="Argument.name">IST_TO_UTC</stringProp>
+            <stringProp name="Argument.value">-19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="UTC_TO_IST" elementType="Argument">
+            <stringProp name="Argument.name">UTC_TO_IST</stringProp>
+            <stringProp name="Argument.value">19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SHARDINGKEY" elementType="Argument">
+            <stringProp name="Argument.name">SHARDINGKEY</stringProp>
+            <stringProp name="Argument.value">&quot;sk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PRIMARYKEY" elementType="Argument">
+            <stringProp name="Argument.name">PRIMARYKEY</stringProp>
+            <stringProp name="Argument.value">&quot;pk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX</stringProp>
+            <stringProp name="Argument.value">&quot;vindex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEC_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">SEC_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;secIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NON_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">NON_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;nonIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX_UNIQUE" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX_UNIQUE</stringProp>
+            <stringProp name="Argument.value">&quot;vindexUnique&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="local" enabled="true">
+        <stringProp name="dataSource">local</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select 1</stringProp>
+        <stringProp name="dbUrl">jdbc:mysql://localhost:3306/test</stringProp>
+        <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
+        <stringProp name="username">root</stringProp>
+        <stringProp name="password">root</stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Transactional Data Store" enabled="true">
+        <stringProp name="dataSource">txnl</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=master</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Secondary Data Store" enabled="true">
+        <stringProp name="dataSource">sec</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select * from dummy</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=archival</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Cluster" enabled="true">
+        <stringProp name="dataSource">cluster</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:ekart-tds-0001.nm.flipkart.com:15991@archivalstore:10.32.41.226:2181:hbase/shipment/shipment?dataStoreType=txnl</stringProp>
+        <stringProp name="driver">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">pInsert.output</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.listener.GraphsGeneratorListener guiclass="TestBeanGUI" testclass="kg.apc.jmeter.listener.GraphsGeneratorListener" testname="jp@gc - Graphs Generator" enabled="true">
+        <boolProp name="aggregateRows">false</boolProp>
+        <boolProp name="autoScaleRows">false</boolProp>
+        <stringProp name="endOffset"></stringProp>
+        <stringProp name="excludeLabels"></stringProp>
+        <boolProp name="excludeSamplesWithRegex">false</boolProp>
+        <intProp name="exportMode">1</intProp>
+        <stringProp name="filePrefix">pInsert</stringProp>
+        <stringProp name="forceY"></stringProp>
+        <stringProp name="granulation">60000</stringProp>
+        <intProp name="graphHeight">600</intProp>
+        <intProp name="graphWidth">800</intProp>
+        <stringProp name="includeLabels"></stringProp>
+        <boolProp name="includeSamplesWithRegex">false</boolProp>
+        <stringProp name="limitRows">150</stringProp>
+        <stringProp name="lineWeight"></stringProp>
+        <stringProp name="lowCountLimit"></stringProp>
+        <stringProp name="outputBaseFolder"></stringProp>
+        <boolProp name="paintGradient">true</boolProp>
+        <boolProp name="paintZeroing">true</boolProp>
+        <boolProp name="preventOutliers">false</boolProp>
+        <boolProp name="relativeTimes">false</boolProp>
+        <stringProp name="resultsFileName">pInsert.output</stringProp>
+        <stringProp name="startOffset"></stringProp>
+        <stringProp name="successFilter"></stringProp>
+      </kg.apc.jmeter.listener.GraphsGeneratorListener>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insert" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1467094816000</longProp>
+        <longProp name="ThreadGroup.end_time">1467094816000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Ishipment_address" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">insert into shipment_address (shipmentid, addressid) values (${counter},${counter})
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Irunsheet" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">insert into runsheet (runsheetid, isactive, deliverydate, createdatetime) values (${counter},0,${DATETIME_MIN_IST},${DATETIME_MIN_IST})
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Ishipment" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">insert into shipment (shipmentid, isactive, trackingid, createdatetime) values (${counter},0,&quot;testdata${counter}&quot;,${DATETIME_MIN_IST})
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="delete" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1467094816000</longProp>
+        <longProp name="ThreadGroup.end_time">1467094816000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Dshipment" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">delete from shipment where shipmentid = ${counter}
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Drunsheet" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">delete from runsheet where runsheetid = ${counter}
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Dshipment_address" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">delete from shipment_address where shipmentid = ${counter} and addressid = ${counter}
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="select" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <longProp name="ThreadGroup.start_time">1467094816000</longProp>
+        <longProp name="ThreadGroup.end_time">1467094816000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${NUM_OF_TESTROWS}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">0</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">counter</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">false</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Stshipment" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">select * from tshipment_address where shipmentid=${counter} and addressid=${counter}
+</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="vSchema" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1465147238000</longProp>
+        <longProp name="ThreadGroup.end_time">1465147238000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="init" enabled="true">
+          <stringProp name="BeanShellSampler.query">bsh.shared.tableMetaData = new HashMap();
+bsh.shared.autoIncrement = new HashMap();
+bsh.shared.testCases = new ArrayList();
+bsh.shared.dataTypes = new ArrayList();
+bsh.shared.tableName = new ArrayList();
+bsh.shared.values = new ArrayList();
+bsh.shared.testCase = &quot;&quot;;
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="vschemaExtractor" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+/*
+ * Sharing Key Index Type ArrayList
+ */
+shardingKeyIndexType = new ArrayList();
+shardingKeyIndexType.add(&quot;hash&quot;);
+shardingKeyIndexType.add(&quot;binarymd5&quot;);
+shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
+
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
+
+String tableName = &quot;&quot;;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(new FileReader(${VSCHEMAFILE}));
+JSONObject jsonObject = (JSONObject) obj;
+JSONObject shardingKey = new JSONObject();
+
+vindex = new HashMap();
+vindexUnique = new HashMap();
+
+boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
+JSONObject tables = jsonObject.get(&quot;tables&quot;);
+JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
+Iterator keys = tables.keySet().iterator();
+
+getColumnVindexes(JSONObject tableDetails){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
+//			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
+		}
+		else{
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+    }
+    
+}
+
+getColumnUniqueVindexes(JSONObject tableDetails){
+	vindexUnique.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(vindexUniqueType.contains(type)){
+			vindexUnique.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+	}
+}
+
+getAutoIncrement(JSONObject tableDetails){
+	/*
+	 * Written with the assumption that at max only one auto_increment column will be defined
+	 */
+	 try{
+	 	String colName = tableDetails.get(&quot;auto_increment&quot;).get(&quot;column&quot;);
+	 	hashSet = new HashSet();
+	 	hashSet.add(colName);
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+	 catch(Exception e){
+		hashSet = new HashSet();
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+
+}
+
+getValues(String tableName){
+    	getColumnVindexes(tables.get(tableName));
+  	getAutoIncrement(tables.get(tableName));
+	getColumnUniqueVindexes(tables.get(tableName));	
+}
+
+if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;n&quot;)){
+	while(keys.hasNext()) {
+		tableName = (String)keys.next();
+		if(tableName.equals(&quot;test_one&quot;) || tableName.equals(&quot;test_two&quot;) || tableName.equals(&quot;runsheet_shipments&quot;) || tableName.equals(&quot;tshipment&quot;) || tableName.equals(&quot;trunsheet&quot;) || tableName.equals(&quot;tshipment_address&quot;)){
+			continue;
+		}
+		getValues(tableName);
+	}
+}
+else if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;y&quot;)){
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	try{
+		br = new BufferedReader(new FileReader(vars.get(&quot;INPUTFILE&quot;)));
+		while((line = br.readLine()) != null){
+			tableName = line;
+			getValues(tableName);	
+		}
+	}
+	catch(Exception e){
+		System.out.println(e.getMessage());
+		log.error(e.getMessage());
+		IsSuccess = false;
+	}
+	
+}
+else{
+	System.out.println(&quot;Argument for option: inputgiven is not valid!&quot;);
+}
+
+bsh.shared.vindex = vindex;
+bsh.shared.shardingKey = shardingKey;
+bsh.shared.vindexUnique = vindexUnique;
+System.out.println(&quot;SKs &quot; + shardingKey);
+System.out.println(&quot;Vindex &quot; + vindex);
+System.out.println(&quot;IgnoreColumns: &quot; + bsh.shared.autoIncrement);
+System.out.println(&quot;ShardedStatus: &quot; + vindexUnique);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="extractMetaData" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+generateColNameList(int colCount, HashMap colLevel){
+	colNameList = new ArrayList(colCount);
+	for(int i=0; i&lt;colCount;i++){
+		colNameList.add(null);
+	}
+	for(String colName: colLevel.keySet()){
+		colNameList.set(colLevel.get(colName).get(&quot;ColumnNumber&quot;) - 1, colName);
+	}
+	return colNameList;
+}
+
+getPrimaryKeys(ResultSet rspk){
+	pk = new ArrayList();
+	while(rspk.next()){
+		try{
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));	
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int i=pk.size(); i&lt;rspk.getInt(&quot;KEY_SEQ&quot;); i++){
+				pk.add(null);
+			}
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));
+			//System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+		catch(Exception e){
+			System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+	}
+	return pk;
+}
+
+getSecondaryIndexes(ResultSet rsSecIndex){
+	secIndex = new ArrayList();
+	while(rsSecIndex.next()){
+		if(rsSecIndex.getString(&quot;INDEX_NAME&quot;).equals(&quot;PRIMARY&quot;)){
+			continue;
+		}
+		else{
+			secIndex.add(rsSecIndex.getString(&quot;COLUMN_NAME&quot;));
+		}
+	}
+	return secIndex;
+}
+
+getNonIndexes(ArrayList pk, ArrayList colNameList, ArrayList secIndex){
+	nonIndex = new ArrayList();
+	for(String colName: colNameList){
+		if(pk.contains(colName) || secIndex.contains(colName) || bsh.shared.vindex.get(tableName).contains(colName) || bsh.shared.shardingKey.get(tableName).equals(colName)){
+			continue;
+		}
+		else{
+			nonIndex.add(colName);
+		}
+	}
+	return nonIndex;
+}
+
+printResultSet(ResultSet rs){
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int colCount = rsmd.getColumnCount();
+	while(rs.next()){
+		for (int i = 1; i &lt;= colCount; i++) {
+	        if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	
+	    }
+	        System.out.println(&quot;\n&quot;);
+	}
+}
+
+Connection conn;
+try{
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+	System.out.println(&quot;Connection established!&quot;);
+	
+	DatabaseMetaData dbmd = conn.getMetaData();
+
+	for(String tN: bsh.shared.shardingKey.keySet()){
+		tableName = tN;
+		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
+		tableMetaData = bsh.shared.tableMetaData;
+		colLevel = new HashMap();
+		int colCount = 0;	
+		colNames = new ArrayList();
+		colTypes = new ArrayList();
+//		printResultSet(rs);	
+		System.out.println(&quot;--------------------&quot;+tableName+ &quot;--------------------&quot;);
+		
+		while(rs.next()){
+
+//Always declare new HashMap else use remove() method of hashMap. Because if clear() method is used then the element last added
+//will get copied as many times as the number of elements in colList due to addition of reference in the colList in add() method. 
+			int index = rs.getInt(&quot;ORDINAL_POSITION&quot;) - 1;
+			try{
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(IndexOutOfBoundsException e){
+				for(int i=colNames.size(); i&lt;=index; i++){
+					colNames.add(null);
+					colTypes.add(null);
+				}
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(Exception e){
+				System.out.println(&quot;Error: &quot; + e.getMessage());
+			}
+			colCount++;
+		}
+		tableLevel = new HashMap();
+		tableLevel.put(&quot;ColNames&quot;, colNames);
+		tableLevel.put(&quot;ColTypes&quot;, colTypes);
+		tableLevel.put(&quot;ColCount&quot;, colCount);		
+		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
+		
+//		ResultSet rspk = dbmd.getPrimaryKeys(vars.get(&quot;DBNAME&quot;), null, tableName);		
+//		pk = getPrimaryKeys(rspk);
+//		tableLevel.put(${PRIMARYKEY}, pk);
+
+//		ResultSet rsSecIndex = dbmd.getIndexInfo(vars.get(&quot;DBNAME&quot;), null, tableName, false, false);
+//		secIndex = getSecondaryIndexes(rsSecIndex);
+//		tableLevel.put(${SEC_INDEX}, secIndex);
+	
+//		nonIndex = getNonIndexes(pk, colNames, secIndex);
+//		tableLevel.put(${NON_INDEX}, nonIndex);
+		
+		tableMetaData.put(tableName,tableLevel);
+		bsh.shared.tableMetaData = tableMetaData;
+	}
+
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess=false;
+}
+finally{
+	conn.close();
+	System.out.println(&quot;Connection closed!&quot;);
+}
+System.out.println(&quot;metaData &quot; + bsh.shared.tableMetaData);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="generateQueries" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1467361633000</longProp>
+        <longProp name="ThreadGroup.end_time">1467361633000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="generateQueries" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.BigInteger;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+getValue(String type, Integer count){
+//  System.out.println(&quot;Hi&quot;+length);
+//  System.out.println(type);
+    switch(type){
+        case &quot;BIGINT&quot;:
+        case &quot;INT&quot;:
+			return count.toString();
+        case &quot;VARCHAR&quot;:
+            return ${PREFIX_STRING} + count;
+        case &quot;TINYINT&quot;:
+            return &quot;255&quot;;
+        case &quot;BIT&quot;:
+            return &quot;0&quot;;
+        case &quot;DATETIME&quot;:
+		tmsp = new Timestamp((Timestamp.valueOf(${DATETIME_MIN_IST})).getTime() + count*1000);
+          return tmsp;
+        default:
+            return &quot;Hi&quot;;
+    }
+}
+generateSQL(HashMap tableDetails, int count){
+	String initial = &quot;insert into &quot;+ tableName;
+	String columnName = &quot;(&quot;;
+	String parameters = &quot;values (&quot;;
+	
+	for(int i=0; i&lt;tableDetails.get(&quot;ColNames&quot;).size(); i++){
+		String colName = tableDetails.get(&quot;ColNames&quot;).get(i);
+		String dataType = tableDetails.get(&quot;ColTypes&quot;).get(i);
+		if(bsh.shared.autoIncrement.get(tableName).contains(colName)){
+			continue;
+		}
+	   	value =  getValue(dataType, count);
+		columnName = columnName + colName + &quot;,&quot;;
+		parameters = parameters + &quot;&apos;&quot; + value + &quot;&apos;,&quot;;
+	}
+	 
+	columnName = columnName.substring(0, columnName.length() - 1) + &quot;)&quot;;
+	parameters = parameters.substring(0, parameters.length() - 1) + &quot;)&quot;;
+//	System.out.println(columnName);
+//	System.out.println(&quot;Hi &quot; + insertTableLevel);
+	
+	return initial + columnName + parameters;
+}
+
+getTestCase(){
+	String testCase = &quot;&quot;;
+	testCase = testCase.concat(tableName + &quot;~&quot;);
+	String shardingKey = bsh.shared.shardingKey.get(tableName);
+	int index = bsh.shared.tableMetaData.get(tableName).get(&quot;ColNames&quot;).indexOf(shardingKey);
+	String dataType = bsh.shared.tableMetaData.get(tableName).get(&quot;ColTypes&quot;).get(index);
+	testCase = testCase.concat(&quot;ShardingKey type: &quot; + dataType + &quot;~&quot;);
+	testCase = testCase.concat(&quot;Vindex Count: &quot; + bsh.shared.vindex.get(tableName).size() + &quot;~&quot;);
+	testCase = testCase.concat(&quot;AutoIncrement Count: &quot; + bsh.shared.autoIncrement.get(tableName).size());
+	return testCase;
+}
+
+Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+Statement st = conn.createStatement();
+int threadNum = ${__threadNum};
+fw = new FileWriter(&quot;insert&quot;+ threadNum +&quot;.sql&quot;, false);
+bw = new BufferedWriter(fw);
+out = new PrintWriter(bw);
+for(String tN: bsh.shared.tableMetaData.keySet()){
+	tableName = tN;
+	String testCase = getTestCase();
+	for(int i=0; i&lt; ${NUM_OF_TESTROWS}; i++){
+		String sql = generateSQL(bsh.shared.tableMetaData.get(tableName), i + (threadNum - 1)*${NUM_OF_TESTROWS});
+//		String sql = generateSQL(tableName, bsh.shared.tableMetaData.get(tableName), i);
+		out.println(testCase + &quot;;&quot; + sql);
+	}
+}
+out.close();
+st.close();
+conn.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insertUsingFile" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1467094816000</longProp>
+        <longProp name="ThreadGroup.end_time">1467094816000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </LoopController>
+        <hashTree>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="${testCase}" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Update Statement</stringProp>
+            <stringProp name="query">${query}</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">;</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">${__eval(insert${__threadNum}.sql)}</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">false</boolProp>
+            <stringProp name="shareMode">shareMode.group</stringProp>
+            <boolProp name="stopThread">true</boolProp>
+            <stringProp name="variableNames">testCase,query</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="ensure" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1463981917000</longProp>
+        <longProp name="ThreadGroup.end_time">1463981917000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="txnl" enabled="true">
+          <stringProp name="dataSource">cluster</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">select * from shipment_address</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout">10</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="archival" enabled="false">
+          <stringProp name="BeanShellSampler.query">import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.sql.*;
+Connection replica = DataSourceElement.getConnection(&quot;sec&quot;);
+Statement stmtReplica = replica.createStatement();
+
+try{
+//	ResultSet rs = stmtReplica.executeQuery(&quot;select * from shipment.runsheet where createdatetime=TO_DATE(&apos;&quot;+str+&quot;&apos;)&quot;);
+	ResultSet rs = stmtReplica.executeQuery(&quot;select * from shipment.shipment_address&quot;);
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int columnsNumber = rsmd.getColumnCount();
+	
+	while(rs.next()){
+	for (int i = 1; i &lt;= columnsNumber; i++) {
+		if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	    }
+	    System.out.println(&quot;\n&quot;);
+	}
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess = false;
+}
+stmtReplica.close();
+replica.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

@@ -1,0 +1,5 @@
+Label,# Samples,Average,Min,Max,90% Line,Std. Dev.,Error %,Throughput,KB/sec,Avg. Bytes
+init,1,9,9,9,9,0.00,0.00%,111.1,0.43,4.0
+vschemaExtractor,1,48,48,48,48,0.00,0.00%,20.8,0.00,.0
+extractMetaData,1,690,690,690,690,0.00,100.00%,1.4,0.00,.0
+TOTAL,3,249,9,690,690,312.24,33.33%,4.0,0.01,1.3

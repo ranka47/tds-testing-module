@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="prepPhase" enabled="true">
+      <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+      <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+        <boolProp name="LoopController.continue_forever">false</boolProp>
+        <stringProp name="LoopController.loops">1</stringProp>
+      </elementProp>
+      <stringProp name="ThreadGroup.num_threads">1</stringProp>
+      <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+      <longProp name="ThreadGroup.start_time">1465147238000</longProp>
+      <longProp name="ThreadGroup.end_time">1465147238000</longProp>
+      <boolProp name="ThreadGroup.scheduler">false</boolProp>
+      <stringProp name="ThreadGroup.duration"></stringProp>
+      <stringProp name="ThreadGroup.delay"></stringProp>
+    </ThreadGroup>
+    <hashTree>
+      <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="init" enabled="true">
+        <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+        <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+bsh.shared.tableMetaData = new HashMap();
+bsh.shared.insertResult = new HashMap();
+bsh.shared.colNameList = new HashMap();
+bsh.shared.queryValues = new ArrayList();
+bsh.shared.ignoreTables = new ArrayList();
+bsh.shared.ignoreColumns = new HashMap();
+bsh.shared.ignoreTables = new ArrayList();
+bsh.shared.autoIncrement = new HashMap();
+/*
+ * Initialising ColumnTypes
+ */
+colTypes = new ArrayList();
+colTypes.add(${VINDEX});
+colTypes.add(${SEC_INDEX});
+colTypes.add(${NON_INDEX});
+colTypes.add(${PRIMARYKEY});
+colTypes.add(${SHARDINGKEY});
+bsh.shared.colTypes = colTypes;
+
+br = new BufferedReader(new FileReader(${IGNORETABLES}));
+while ((line = br.readLine()) != null) {
+	bsh.shared.ignoreTables.add(line);	
+}</stringProp>
+        <stringProp name="BeanShellSampler.filename"></stringProp>
+        <stringProp name="BeanShellSampler.parameters"></stringProp>
+        <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+      </BeanShellSampler>
+      <hashTree/>
+      <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="vschemaExtractor" enabled="true">
+        <stringProp name="BeanShellSampler.query">import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+/*
+ * Sharing Key Index Type ArrayList
+ */
+shardingKeyIndexType = new ArrayList();
+shardingKeyIndexType.add(&quot;hash&quot;);
+shardingKeyIndexType.add(&quot;binarymd5&quot;);
+shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
+
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
+
+String tableName = &quot;&quot;;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(new FileReader(${VSCHEMAFILE}));
+JSONObject jsonObject = (JSONObject) obj;
+JSONObject shardingKey = new JSONObject();
+
+vindex = new HashMap();
+vindexUnique = new HashMap();
+
+boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
+JSONObject tables = jsonObject.get(&quot;tables&quot;);
+JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
+Iterator keys = tables.keySet().iterator();
+
+getColumnVindexes(JSONObject tableDetails){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
+//			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
+		}
+		else{
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+    }
+    
+}
+
+getColumnUniqueVindexes(JSONObject tableDetails){
+	vindexUnique.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(vindexUniqueType.contains(type)){
+			vindexUnique.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+	}
+}
+
+getAutoIncrement(JSONObject tableDetails){
+	/*
+	 * Written with the assumption that at max only one auto_increment column will be defined
+	 */
+	 try{
+	 	String colName = tableDetails.get(&quot;auto_increment&quot;).get(&quot;column&quot;);
+	 	hashSet = new HashSet();
+	 	hashSet.add(colName);
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+	 catch(Exception e){
+		hashSet = new HashSet();
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+
+}
+
+getValues(String tableName){
+    	getColumnVindexes(tables.get(tableName));
+  	getAutoIncrement(tables.get(tableName));
+	getColumnUniqueVindexes(tables.get(tableName));	
+}
+
+while(keys.hasNext()) {
+	tableName = (String)keys.next();
+	if(bsh.shared.ignoreTables.contains(tableName)){
+		continue;
+	}
+	getValues(tableName);
+}
+
+bsh.shared.vindex = vindex;
+bsh.shared.shardingKey = shardingKey;
+bsh.shared.vindexUnique = vindexUnique;
+System.out.println(&quot;sk &quot; + shardingKey);
+System.out.println(&quot;vindex &quot; + vindex);
+System.out.println(&quot;vindexUnique &quot; + vindexUnique);
+System.out.println(&quot;autoIncrement &quot; + bsh.shared.autoIncrement);
+
+//System.out.println(&quot;ShardedStatus: &quot; + shardedStatus);
+//System.out.println(&quot;Tables: &quot; + tables);</stringProp>
+        <stringProp name="BeanShellSampler.filename"></stringProp>
+        <stringProp name="BeanShellSampler.parameters"></stringProp>
+        <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+      </BeanShellSampler>
+      <hashTree/>
+      <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="queryColsReturnCols" enabled="true">
+        <stringProp name="BeanShellSampler.query">/*
+ * Query Columns: Columns on which where clause will be generated. 
+ * Either specify the columns on which query is to be generated or let the code decide randomly  
+ * Format: TableName ; QueryColumns; ReturnCols
+ * 	TableName: Name of the table
+ * 	QueryColumns: Name of the columns on which query will be generated. Delimited by comma(,)
+ * 	ReturnColumns: Columns that you want to be returned.
+ * 			 
+ */
+try{
+	if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;n&quot;)){
+	fw = new FileWriter(${INPUTFILE}, false);
+	bw = new BufferedWriter(fw);
+	out = new PrintWriter(bw);
+	Random rand = new Random();
+	for(String tableName: bsh.shared.shardingKey.keySet()){
+		String queryCols = &quot;&quot;;
+
+		if(rand.nextInt(2) == 1){
+			queryCols = queryCols + bsh.shared.shardingKey.get(tableName) + ${PARAMETER_SEPARATOR};	
+		}
+		
+		if(bsh.shared.vindex.get(tableName) != null){
+			int numOfQueryCols = rand.nextInt(bsh.shared.vindex.get(tableName).size() + 1);
+			queryColsArray = new ArrayList(bsh.shared.vindex.get(tableName));
+			Collections.shuffle(queryColsArray);
+
+			for(String col: queryColsArray.subList(0, numOfQueryCols)){
+				queryCols = queryCols + col + ${PARAMETER_SEPARATOR};
+			}
+		}
+		if(queryCols.length() &gt; 0){
+			queryCols = queryCols.substring(0, queryCols.length() - 1);
+		}
+
+		out.println(tableName + ${TESTCASE_SEPARATOR} + queryCols + ${TESTCASE_SEPARATOR} + ${SELECT_STAR});
+	}
+	out.close();
+}
+}
+catch(Exception e){
+	IsSuccess = false;
+	System.out.println(e);
+}</stringProp>
+        <stringProp name="BeanShellSampler.filename"></stringProp>
+        <stringProp name="BeanShellSampler.parameters"></stringProp>
+        <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+      </BeanShellSampler>
+      <hashTree/>
+      <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="extractMetaData" enabled="true">
+        <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+        <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+Connection conn;
+
+getColumnAttributes(ResultSet rs){
+	attrLevel = new HashMap();
+	attrLevel.put(&quot;Type&quot;, rs.getString(&quot;TYPE_NAME&quot;));
+	attrLevel.put(&quot;Nullable&quot;, rs.getString(&quot;IS_NULLABLE&quot;));
+	attrLevel.put(&quot;Default&quot;, rs.getString(&quot;COLUMN_DEF&quot;));
+	attrLevel.put(&quot;Length&quot;, rs.getInt(&quot;COLUMN_SIZE&quot;));
+	attrLevel.put(&quot;AutoIncrement&quot;, rs.getString(&quot;IS_AUTOINCREMENT&quot;));
+	attrLevel.put(&quot;ColumnNumber&quot;, rs.getInt(&quot;ORDINAL_POSITION&quot;));
+	return attrLevel;
+}
+
+generateColNameList(int colCount, HashMap colLevel){
+	colNameList = new ArrayList(colCount);
+	for(int i=0; i&lt;colCount;i++){
+		colNameList.add(null);
+	}
+	for(String colName: colLevel.keySet()){
+		colNameList.set(colLevel.get(colName).get(&quot;ColumnNumber&quot;) - 1, colName);
+	}
+	return colNameList;
+}
+
+getSecondaryIndexes(ResultSet rsSecIndex){
+	secIndex = new ArrayList();
+	while(rsSecIndex.next()){
+		if(rsSecIndex.getString(&quot;INDEX_NAME&quot;).equals(&quot;PRIMARY&quot;)){
+			continue;
+		}
+		else{
+			secIndex.add(rsSecIndex.getString(&quot;COLUMN_NAME&quot;));
+		}
+	}
+	System.out.println(&quot;secIndex&quot;+ secIndex);
+	return secIndex;
+}
+
+getNonIndexes(ArrayList pk, ArrayList colNameList, ArrayList secIndex){
+	nonIndex = new ArrayList();
+	for(String colName: colNameList){
+		if(pk.contains(colName) || secIndex.contains(colName) || bsh.shared.vindex.get(tableName).contains(colName) || bsh.shared.shardingKey.get(tableName).equals(colName)){
+			continue;
+		}
+		else{
+			nonIndex.add(colName);
+		}
+	}
+	return nonIndex;
+}
+
+
+getPrimaryKeys(ResultSet rspk){
+	pk = new ArrayList();
+	while(rspk.next()){
+		try{
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));	
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int i=pk.size(); i&lt;rspk.getInt(&quot;KEY_SEQ&quot;); i++){
+				pk.add(null);
+			}
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));
+			//System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+		catch(Exception e){
+			System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+	}
+	return pk;
+}
+
+getQueryColumns(String[] content){
+	queryCols = new ArrayList();
+	if(content[1].equals(&quot;&quot;)){
+	}
+	else{
+		queryCols.addAll(Arrays.asList(content[1].split(${PARAMETER_SEPARATOR})));
+	}
+	return queryCols;
+}
+
+getReturnColumns(String[] content, ArrayList colNameList, int colCount){
+	returnCols = new ArrayList();
+	if(content[2].equals(${SELECT_STAR})){
+	}
+	else{
+		returnCols.addAll(Arrays.asList(content[2].split(${PARAMETER_SEPARATOR})));
+	}
+	return returnCols;
+}
+
+printResultSet(ResultSet rs){
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int colCount = rsmd.getColumnCount();
+	while(rs.next()){
+		for (int i = 1; i &lt;= colCount; i++) {
+	        if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	
+	    }
+	        System.out.println(&quot;\n&quot;);
+	}
+}
+
+try{
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	br = new BufferedReader(new FileReader(${INPUTFILE}));
+	conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+	System.out.println(&quot;Connection established!&quot;);
+	
+	DatabaseMetaData dbmd = conn.getMetaData();
+
+	while ((line = br.readLine()) != null) {
+		System.out.println(line);
+		String[] content = line.split(${TESTCASE_SEPARATOR});
+		tableName = content[0];
+		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
+		tableMetaData = bsh.shared.tableMetaData;
+		colLevel = new HashMap();
+		int colCount = 0;	
+
+//		printResultSet(rs);	
+		System.out.println(&quot;--------------------&quot;+tableName+ &quot;--------------------&quot;);
+		
+		while(rs.next()){
+
+//Always declare new HashMap else use remove() method of hashMap. Because if clear() method is used then the element last added
+//will get copied as many times as the number of elements in colList due to addition of reference in the colList in add() method. 
+			HashMap attrLevel = getColumnAttributes(rs);
+			colLevel.put(rs.getString(&quot;COLUMN_NAME&quot;), attrLevel);	
+			colCount++;
+		}
+		
+		tableLevel = new HashMap();
+		tableLevel.put(&quot;colDetails&quot;,colLevel);
+		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
+		tableLevel.put(&quot;colCount&quot;, colCount);
+
+		colNameList = generateColNameList(colCount, colLevel);
+		bsh.shared.colNameList.put(tableName, colNameList);
+
+		ResultSet rspk = dbmd.getPrimaryKeys(vars.get(&quot;DBNAME&quot;), null, tableName);		
+//		printResultSet(rspk);
+
+		pk = getPrimaryKeys(rspk);
+		tableLevel.put(${PRIMARYKEY}, pk);
+
+		ArrayList queryCols = getQueryColumns(content);
+		tableLevel.put(&quot;QueryColumns&quot;, queryCols);
+
+		ArrayList returnCols = getReturnColumns(content, colNameList, colCount); 
+		tableLevel.put(&quot;ReturnColumns&quot;, returnCols);
+
+		ResultSet rsSecIndex = dbmd.getIndexInfo(vars.get(&quot;DBNAME&quot;), null, tableName, false, false);
+		secIndex = getSecondaryIndexes(rsSecIndex);
+		tableLevel.put(${SEC_INDEX}, secIndex);
+
+		nonIndex = getNonIndexes(pk, colNameList, secIndex);
+		tableLevel.put(${NON_INDEX}, nonIndex);
+		
+		tableMetaData.put(tableName,tableLevel);	
+		bsh.shared.tableMetaData = tableMetaData;
+	}
+
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess=false;
+}
+finally{
+	conn.close();
+}
+System.out.println(&quot;Connection closed!&quot;);
+System.out.println(&quot;tableMetaData &quot; + bsh.shared.tableMetaData);
+System.out.println(&quot;colNameList &quot; + bsh.shared.colNameList);</stringProp>
+        <stringProp name="BeanShellSampler.filename"></stringProp>
+        <stringProp name="BeanShellSampler.parameters"></stringProp>
+        <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+      </BeanShellSampler>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

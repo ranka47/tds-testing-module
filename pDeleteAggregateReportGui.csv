@@ -1,0 +1,5 @@
+sampler_label,aggregate_report_count,average,aggregate_report_median,aggregate_report_90%_line,aggregate_report_min,aggregate_report_max,aggregate_report_error%,aggregate_report_rate,aggregate_report_bandwidth,aggregate_report_stddev
+init,1,9,9,9,9,9,0.00%,111.1,.4,0.00
+vschemaExtractor,1,48,48,48,48,48,0.00%,20.8,.0,0.00
+extractMetaData,1,690,690,690,690,690,100.00%,1.4,.0,0.00
+TOTAL,3,249,48,690,9,690,33.33%,4.0,.0,312.24
