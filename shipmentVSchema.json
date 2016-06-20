@@ -1,0 +1,125 @@
+{
+      "sharded": true,
+      "vindexes": {
+        "hash": {
+          "type": "hash"
+        },
+        "tracking_shipment_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "Table": "tracking_shipment_idx",
+            "From": "trackingid",
+            "To": "shipmentid"
+          },
+          "owner": "shipment"
+        },
+        "vindex_one": {
+          "type": "lookup_hash",
+          "params": {
+            "Table": "vindex_one",
+            "From": "vindex",
+            "To": "sk"
+          },
+          "owner": "test_one"
+        },
+        "vindex_two": {
+          "type": "lookup_hash",
+          "params": {
+            "Table": "vindex_two",
+            "From": "vindex",
+            "To": "sk"
+          },
+          "owner": "test_two"
+        },
+        "date_shipment_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "Table": "date_shipment_idx",
+            "From": "createdatetime",
+            "To": "shipmentid"
+          },
+          "owner": "shipment"
+        },
+        "date_runsheet_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "Table": "date_runsheet_idx",
+            "From": "createdatetime",
+            "To": "runsheetid"
+          },
+          "owner": "runsheet"
+        },
+        "keyspace_idx": {
+          "type": "numeric"
+        }
+      },
+      "tables": {
+        "shipment": {
+          "column_vindexes": [{
+            "column": "shipmentid",
+            "name": "hash"
+          }, {
+            "column": "trackingid",
+            "name": "tracking_shipment_idx"
+          }, {
+            "column": "createdatetime",
+            "name": "date_shipment_idx"
+          }],
+          "auto_increment": {
+            "column": "shipmentid",
+            "sequence": "shipment_idx"
+          }
+        },
+        "test_two":{
+          "auto_increment":{
+            "column" : "increment",
+            "sequence" : "test_two_idx"
+          },
+          "column_vindexes":[{
+            "column":"sk",
+            "name":"hash"
+          }, {
+            "column":"vindex",
+            "name":"vindex_two"
+          }]
+        },
+        "test_one":{
+          "auto_increment":{
+            "column":"increment",
+            "sequence":"test_one_idx"
+          },
+          "column_vindexes":[{
+            "column":"sk",
+            "name":"hash"
+          }, {
+            "column":"vindex",
+            "name":"vindex_one"
+          }]
+        },
+        "runsheet": {
+          "column_vindexes": [{
+            "column": "runsheetid",
+            "name": "hash"
+          }, {
+            "column": "createdatetime",
+            "name": "date_runsheet_idx"
+          }],
+          "auto_increment": {
+            "column": "runsheetid",
+            "sequence": "runsheet_idx"
+          }
+        },
+        "runsheet_shipments": {
+          "column_vindexes": [{
+            "column": "runsheetid",
+            "name": "hash"
+          }]
+        },
+        "shipment_address": {
+          "column_vindexes": [{
+            "column": "shipmentid",
+            "name": "hash"
+          }]
+        }
+      }
+}

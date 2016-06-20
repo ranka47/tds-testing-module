@@ -1,0 +1,22 @@
+{
+  "sharded": false,
+  "tables": {
+    "shipment_idx": {
+      "type": "Sequence"
+    },
+    "test_one_idx": {
+      "type": "Sequence"
+    },
+    "test_two_idx": {
+      "type": "Sequence"
+    },
+    "runsheet_idx": {
+      "type": "Sequence"
+    },
+    "tracking_shipment_idx": {},
+    "date_runsheet_idx": {},
+    "date_shipment_idx": {},
+    "vindex_one":{},
+    "vindex_two":{}
+  }
+}
