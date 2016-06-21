@@ -7,45 +7,63 @@
         "tracking_shipment_idx": {
           "type": "lookup_hash",
           "params": {
-            "Table": "tracking_shipment_idx",
-            "From": "trackingid",
-            "To": "shipmentid"
+            "table": "tracking_shipment_idx",
+            "from": "trackingid",
+            "to": "shipmentid"
           },
           "owner": "shipment"
         },
         "vindex_one": {
           "type": "lookup_hash",
           "params": {
-            "Table": "vindex_one",
-            "From": "vindex",
-            "To": "sk"
+            "table": "vindex_one",
+            "from": "vindex",
+            "to": "sk"
+          },
+          "owner": "test_one"
+        },
+        "vindex_one_unique": {
+          "type": "lookup_hash_unique",
+          "params": {
+            "table": "vindex_one_unique",
+            "from": "vindex_unique",
+            "to": "sk"
           },
           "owner": "test_one"
         },
         "vindex_two": {
           "type": "lookup_hash",
           "params": {
-            "Table": "vindex_two",
-            "From": "vindex",
-            "To": "sk"
+            "table": "vindex_two",
+            "from": "vindex",
+            "to": "sk"
+          },
+          "owner": "test_two"
+        },
+        "vindex_two_unique": {
+          "type": "lookup_hash_unique",
+          "params": {
+            "table": "vindex_two_unique",
+            "from": "vindex_unique",
+            "to": "sk"
           },
           "owner": "test_two"
         },
         "date_shipment_idx": {
           "type": "lookup_hash",
           "params": {
-            "Table": "date_shipment_idx",
-            "From": "createdatetime",
-            "To": "shipmentid"
+            "table": "date_shipment_idx",
+            "from": "createdatetime",
+            "to": "shipmentid"
           },
           "owner": "shipment"
         },
         "date_runsheet_idx": {
           "type": "lookup_hash",
           "params": {
-            "Table": "date_runsheet_idx",
-            "From": "createdatetime",
-            "To": "runsheetid"
+            "table": "date_runsheet_idx",
+            "from": "createdatetime",
+            "to": "runsheetid"
           },
           "owner": "runsheet"
         },
@@ -81,6 +99,9 @@
           }, {
             "column":"vindex",
             "name":"vindex_two"
+          },{
+            "column":"vindex_unique",
+            "name":"vindex_two_unique"
           }]
         },
         "test_one":{
@@ -94,6 +115,9 @@
           }, {
             "column":"vindex",
             "name":"vindex_one"
+          }, {
+            "column":"vindex_unique",
+            "name" : "vindex_one_unique"
           }]
         },
         "runsheet": {

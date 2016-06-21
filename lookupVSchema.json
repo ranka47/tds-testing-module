@@ -17,6 +17,8 @@
     "date_runsheet_idx": {},
     "date_shipment_idx": {},
     "vindex_one":{},
-    "vindex_two":{}
+    "vindex_two":{},
+    "vindex_one_unique":{},
+    "vindex_two_unique":{}
   }
 }
