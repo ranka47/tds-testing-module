@@ -8,10 +8,6 @@ SELECT * FROM test_one WHERE sk=1 limit 10
 SELECT * FROM test_one WHERE vindex=1 
 SELECT * FROM test_one WHERE sec_index=1
 SELECT * FROM test_one WHERE non_index=1 
-SELECT * FROM test_one WHERE sk=1 and pk=1 
-SELECT * FROM test_one WHERE sk=1 and vindex=1 
-SELECT * FROM test_one WHERE sk=1 and vindex=1 and pk=1 
-SELECT * FROM test_one WHERE sk=1 and non_index=1 
 SELECT * FROM test_one where pk <= 1 or sk != 1
 SELECT * FROM test_one where non_index <= 1 and sk != 1
 SELECT * FROM test_one where non_index <= 1 or non_index != 1
@@ -80,3 +76,15 @@ SELECT non_index FROM test_one WHERE sk=1
 SELECT non_index FROM test_one WHERE vindex=1
 SELECT non_index FROM test_one WHERE sec_index=1
 SELECT non_index FROM test_one WHERE non_index=1
+SELECT * FROM test_one LEFT JOIN (test_two) ON (test_two.sk=test_one.sk AND test_two.pk=test_one.pk)
+SELECT test_one.non_index, test_two.non_index,test_one.sk, test_two.non_index,test_one.vindex, test_two.vindex FROM test_one LEFT JOIN (test_two) ON (test_two.sk=test_one.sk)
+SELECT test_one.pk FROM test_one LEFT JOIN (test_two) ON (test_two.non_index=test_one.non_index)
+SELECT test_one.pk FROM test_one LEFT JOIN (test_two) ON (test_two.vindex=test_one.vindex)
+SELECT test_one.sk FROM test_one LEFT JOIN (test_two) ON (test_two.sk=test_one.sk AND test_two.pk=test_one.pk)
+SELECT test_one.sk FROM test_one LEFT JOIN test_two USING (pk,sk,non_index)
+SELECT t1.sk FROM test_one as t1 LEFT JOIN (test_two as t2) ON (t2.sk=t1.sk AND t2.pk=t1.pk)
+SELECT t1.sk FROM test_one as t1 LEFT JOIN (test_two as t2, test_two as t3) ON (t2.sk=t1.sk AND t2.pk=t1.pk and t3.sk=t1.sk)
+SELECT t1.sk FROM test_one as t1 LEFT JOIN (test_two as t2 CROSS JOIN test_two AS t3) ON (t2.pk=t1.pk AND t3.sk=t1.sk)
+SELECT t1.pk, t2.sk FROM test_one AS t1 INNER JOIN test_two AS t2 ON t1.sk = t2.sk
+SELECT * FROM test_one NATURAL JOIN test_two
+SELECT * FROM (SELECT test_one.pk, test_one.sk from test_one) as t1
