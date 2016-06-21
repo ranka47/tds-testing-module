@@ -19,7 +19,7 @@
           </elementProp>
           <elementProp name="NUM_OF_INSERT" elementType="Argument">
             <stringProp name="Argument.name">NUM_OF_INSERT</stringProp>
-            <stringProp name="Argument.value">10</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="MACHINE" elementType="Argument">
@@ -39,17 +39,17 @@
           </elementProp>
           <elementProp name="INPUTFILE" elementType="Argument">
             <stringProp name="Argument.name">INPUTFILE</stringProp>
-            <stringProp name="Argument.value">${__P(inputfile,&quot;testCase1.csv&quot;)}</stringProp>
+            <stringProp name="Argument.value">${__P(inputfile,&quot;testCases/testCase1.csv&quot;)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="SELECT_FILE_TXNL" elementType="Argument">
             <stringProp name="Argument.name">SELECT_FILE_TXNL</stringProp>
-            <stringProp name="Argument.value">&quot;selectStmtTxnl.sql&quot;</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtTxnl.sql&quot;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="SELECT_FILE_SEC" elementType="Argument">
             <stringProp name="Argument.name">SELECT_FILE_SEC</stringProp>
-            <stringProp name="Argument.value">&quot;selectStmtSec.sql&quot;</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtSec.sql&quot;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="VSCHEMAFILE" elementType="Argument">
@@ -542,7 +542,7 @@ try{
 
 		ArrayList returnCols = getReturnColumns(content, colNameList, colCount); 
 		tableLevel.put(&quot;ReturnColumns&quot;, returnCols);
-		System.out.println(&quot;I am here&quot;);			
+
 		tableMetaData.put(tableName,tableLevel);	
 		bsh.shared.tableMetaData = tableMetaData;
 	}
@@ -694,7 +694,6 @@ prepareStmtSkeleton(String tableName, ArrayList colNames){
 
 Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
 
-Statement st = conn.createStatement();
 PreparedStatement stmt = null;
 
 for(String tableName: bsh.shared.tableMetaData.keySet()){
@@ -723,7 +722,7 @@ for(String tableName: bsh.shared.tableMetaData.keySet()){
 	}
 }
 //System.out.println(&quot;insertResult &quot; + bsh.shared.insertResult);
-st.close();
+stmt.close();
 conn.close();
 System.out.println(&quot;--------------------\nInsert Phase Completed\n--------------------\n&quot;);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
