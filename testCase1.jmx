@@ -1034,15 +1034,9 @@ compareResults(ArrayList rowsOne, ArrayList rowsTwo, boolean insertResultAsSecon
             response = response.concat(&quot;UNMATCHED! =&gt; Row: &quot; + rowOne + &quot;\n&quot;);
             status = false;
         }
-    }
-//  }
-//    else{
-//      response = response.concat(&quot;No. of rows returned for the query do not match!\n&quot;);
-//          setResponse();
-//          status = false;
-//      }
-        setResponse();
-        return status;
+    	}
+    	setResponse();
+	return status;
 }
 
 Connection txnl = DataSourceElement.getConnection(&quot;txnl&quot;);

@@ -1,0 +1,8 @@
+pk,range,or,sk,notEqual
+nonIndex,range,and,sk,notEqual
+nonIndex,range,or,nonIndex,notEqual
+pk,range,and,nonIndex,in
+pk,range,and,secIndex,notIn
+pk,range,and,nonIndex,notIn
+secIndex,notIn
+nonIndex,notIn
