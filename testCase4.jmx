@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="testCase3" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="testCase4" enabled="true">
       <stringProp name="TestPlan.comments">testCase2: comparing output when all insert columns are not specified</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
@@ -17,9 +17,9 @@
             <stringProp name="Argument.value">0123456789</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="NUM_OF_INSERT" elementType="Argument">
-            <stringProp name="Argument.name">NUM_OF_INSERT</stringProp>
-            <stringProp name="Argument.value">${__P(datasize,10)}</stringProp>
+          <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
+            <stringProp name="Argument.value">${__P(datasize,2)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="MACHINE" elementType="Argument">
@@ -67,9 +67,9 @@
             <stringProp name="Argument.value">&quot;tmp/selectStmt.sql&quot;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="TESTCASE3_INPUT_FILE" elementType="Argument">
-            <stringProp name="Argument.name">TESTCASE3_INPUT_FILE</stringProp>
-            <stringProp name="Argument.value">${__P(testcasefile,testCases/testCase3.csv)}</stringProp>
+          <elementProp name="TESTCASE4_INPUT_FILE" elementType="Argument">
+            <stringProp name="Argument.name">TESTCASE4_INPUT_FILE</stringProp>
+            <stringProp name="Argument.value">${__P(testcasefile,testCases/testCase4.csv)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="BIGINT_RANGE" elementType="Argument">
@@ -175,6 +175,11 @@
           <elementProp name="COLUMN_DEF" elementType="Argument">
             <stringProp name="Argument.name">COLUMN_DEF</stringProp>
             <stringProp name="Argument.value">&quot;default&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX_UNIQUE" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX_UNIQUE</stringProp>
+            <stringProp name="Argument.value">&quot;vindexUnique&quot;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -298,6 +303,7 @@ bsh.shared.colNameList = new HashMap();
 bsh.shared.emptyArrayList = new ArrayList();
 bsh.shared.ignoreColumns = new HashMap();
 bsh.shared.autoIncrement = new HashMap();
+bsh.shared.vindexUnique = new HashMap();
 
 /*
  * Initialising ColumnTypes
@@ -308,6 +314,7 @@ colTypes.add(${SEC_INDEX});
 colTypes.add(${NON_INDEX});
 colTypes.add(${PRIMARYKEY});
 colTypes.add(${SHARDINGKEY});
+colTypes.add(${VINDEX_UNIQUE});
 bsh.shared.colTypes = colTypes;
 
 /*
@@ -342,6 +349,11 @@ shardingKeyIndexType.add(&quot;hash&quot;);
 shardingKeyIndexType.add(&quot;binarymd5&quot;);
 shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
 
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
 
 String tableName = &quot;&quot;;
 String autoIncrementColumn = &quot;&quot;;
@@ -351,6 +363,7 @@ JSONObject jsonObject = (JSONObject) obj;
 JSONObject shardingKey = new JSONObject();
 
 vindex = new HashMap();
+vindexUnique = new HashMap();
 
 boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
 JSONObject tables = jsonObject.get(&quot;tables&quot;);
@@ -358,25 +371,30 @@ JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
 Iterator keys = tables.keySet().iterator();
 
 getColumnVindexes(JSONObject tableDetails){
-	for(Object obj: tableDetails.get(&quot;column_vindexes&quot;)){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
 //		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
-		if(shardingKeyIndexType.contains(vindexes.get(obj.get(&quot;name&quot;)).get(&quot;type&quot;))){
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
 //			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
-			shardingKey.put(tableName, obj.get(&quot;column&quot;));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
 		}
 		else{
-			try{
-				vindex.get(tableName).add(obj.get(&quot;column&quot;));
-			}
-			catch(NullPointerException e){
-//				System.out.println(&quot;Creating new entry in shardingKeyIndexType&quot;);
-				arrayList = new ArrayList();
-				vindex.put(tableName, arrayList);
-				vindex.get(tableName).add(obj.get(&quot;column&quot;));
-			}
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
 		}
     }
     
+}
+
+getColumnUniqueVindexes(JSONObject tableDetails){
+	vindexUnique.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(vindexUniqueType.contains(type)){
+			vindexUnique.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+	}
 }
 
 getAutoIncrement(JSONObject tableDetails){
@@ -399,20 +417,21 @@ getAutoIncrement(JSONObject tableDetails){
 
 while(keys.hasNext()) {
 	tableName = (String)keys.next();
-
-    	if(tableName.equals(&quot;test_one&quot;) || tableName.equals(&quot;test_two&quot;) || tableName.equals(&quot;runsheet_shipments&quot;)){
-    		continue;
-    	}
-
+/*	if(tableName.equals(&quot;test_one&quot;) || tableName.equals(&quot;test_two&quot;) || tableName.equals(&quot;runsheet_shipments&quot;)){
+		continue;
+	}
+*/	
     	getColumnVindexes(tables.get(tableName));
 	getAutoIncrement(tables.get(tableName));
+	getColumnUniqueVindexes(tables.get(tableName));
 }
 bsh.shared.vindex = vindex;
 bsh.shared.shardingKey = shardingKey;
+bsh.shared.vindexUnique = vindexUnique;
 System.out.println(&quot;SKs &quot; + shardingKey);
 System.out.println(&quot;Vindex &quot; + vindex);
 System.out.println(&quot;IgnoreColumns: &quot; + bsh.shared.autoIncrement);
-//System.out.println(&quot;ShardedStatus: &quot; + shardedStatus);
+System.out.println(&quot;ShardedStatus: &quot; + vindexUnique);
 //System.out.println(&quot;Tables: &quot; + tables);</stringProp>
           <stringProp name="BeanShellSampler.filename"></stringProp>
           <stringProp name="BeanShellSampler.parameters"></stringProp>
@@ -725,7 +744,7 @@ bw.close();
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
             <stringProp name="delimiter">\n</stringProp>
             <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="filename">${TESTCASE3_INPUT_FILE}</stringProp>
+            <stringProp name="filename">${TESTCASE4_INPUT_FILE}</stringProp>
             <boolProp name="quotedData">false</boolProp>
             <boolProp name="recycle">false</boolProp>
             <stringProp name="shareMode">shareMode.all</stringProp>
@@ -912,8 +931,7 @@ int count = 0;
 
 for(String tN: bsh.shared.tableMetaData.keySet()){
 	tableName = tN;
-	String line = vars.get(&quot;line&quot;);
-	System.out.println(&quot;TestCase: &quot; + line);
+	String line = &quot;&quot;;
 	content = new ArrayList(Arrays.asList(line.split(&quot;,&quot;)));
 	System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
 
@@ -926,13 +944,13 @@ for(String tN: bsh.shared.tableMetaData.keySet()){
 	System.out.println(sql);
 
 	bsh.shared.insertResult.put(tableName, new HashMap());
-	for(int i=0; i&lt; ${NUM_OF_INSERT}; i++){
+	for(int i=0; i&lt; 2*${NUM_OF_TESTROWS}; i++){
 		insertTableLevel = bsh.shared.insertResult.get(tableName);
 		stmt = generateSQL(stmt, bsh.shared.tableMetaData.get(tableName), insertTableLevel, ignoreColumns);
 		bsh.shared.insertResult.put(tableName, insertTableLevel);
 //			System.out.println(&quot;Hi insertTableLevel &quot; + insertTableLevel);
 		try{
-			stmt.executeUpdate();
+				stmt.executeUpdate();
 //			     System.out.println(&quot;Row &quot;+ i + &quot;: Inserted Successfully!&quot;);
 		}
 		catch (SQLException e){
@@ -948,6 +966,133 @@ System.out.println(&quot;insertResult &quot; + bsh.shared.insertResult);
 stmt.close();
 conn.close();
 System.out.println(&quot;--------------------\nInsert Phase Completed\n--------------------\n&quot;);</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="deleteTestCases" enabled="true">
+            <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.*;
+import java.lang.Math.*;
+import java.lang.Integer;
+import java.lang.Long;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+System.out.println(&quot;--------------------\nDelete Phase\n--------------------\n&quot;);
+
+String tableName = &quot;&quot;;
+PreparedStatement stmt = null;
+String sql = null;
+
+colListIndex = new ArrayList();
+dataTypeList = new ArrayList();
+vindexUniqueIndex = new ArrayList();
+
+generateColList(ArrayList content){
+	colList = new HashSet();
+	if(content.contains(${SHARDINGKEY})){
+		colList.add(tableMetaData.get(tableName).get(${SHARDINGKEY}));
+	}
+	if(content.contains(${PRIMARYKEY})){
+		colList.addAll(tableMetaData.get(tableName).get(${PRIMARYKEY}));
+	}
+	if(content.contains(${VINDEX_UNIQUE})){
+		colList.addAll(bsh.shared.vindexUnique.get(tableName));
+	}
+	return colList;
+}
+
+prepareStmtSkeleton(ArrayList colList){
+	String initial = &quot;delete from &quot;+ tableName + &quot; where &quot;;
+	String params = &quot;&quot;;
+	
+	for(int i=0; i&lt;colList.size(); i++){
+		params = params + colList.get(i) + &quot;=? and &quot;; 
+	}
+	
+	params = params.substring(0, params.length()-5);
+
+	return initial + params;
+}
+
+setData(ArrayList row, String dataType, int index, int place){
+	/*
+	 * Indexing for place in PreparedStatement starts from 1. Thus place++
+	 */
+	place++;
+	switch(dataType){
+     	case &quot;BIGINT&quot;:
+     		stmt.setLong(place, Long.parseLong(row.get(index)));
+        		break;
+		case &quot;INT&quot;:
+        	case &quot;BIT&quot;:
+        	case &quot;TINYINT&quot;:
+        		stmt.setInt(place, Integer.parseInt(row.get(index)));
+        		break;
+		case &quot;VARCHAR&quot;:
+        	  	stmt.setString(place, row.get(index));
+        		break;
+        	case &quot;DATETIME&quot;:
+            	stmt.setTimestamp(place, Timestamp.valueOf(row.get(index)));
+        		break;
+        	default:
+        		System.out.println(&quot;Missing case for data type in setData function: &quot; + dataType);
+    }
+}
+
+
+Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+tableMetaData = bsh.shared.tableMetaData;
+try{
+	for(String tN: tableMetaData.keySet()){
+		String line = vars.get(&quot;line&quot;);
+		content = new ArrayList(Arrays.asList(line.split(&quot;,&quot;)));
+		tableName = tN;
+		System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
+		
+		colList = new ArrayList(generateColList(content));
+		if(colList.isEmpty()){
+			continue;
+		}
+		sql = prepareStmtSkeleton(colList);	
+		stmt=conn.prepareStatement(sql);
+		System.out.println(sql);	
+		colListIndex.clear();
+		dataTypeList.clear();
+		
+		for(String colName: colList){
+			colListIndex.add(bsh.shared.colNameList.get(tableName).indexOf(colName));
+		}
+		
+		for(String colName: colList){
+			dataTypeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+		}
+	
+		for(Map.Entry entry: bsh.shared.insertResult.get(tableName).entrySet()){
+			for(int i=0; i&lt;${NUM_OF_TESTROWS}; i++){
+				int place=0;
+				for(; place&lt;dataTypeList.size(); place++){
+					setData(entry.getValue().get(i), dataTypeList.get(place), colListIndex.get(place), place);
+				}
+				try
+				{
+					stmt.executeUpdate();
+				}
+				catch (SQLException e){
+					System.out.println(&quot;Error: &quot; + e.getMessage());
+					IsSuccess=false;
+				}
+			}
+		}
+	}
+}
+catch(Exception e){
+	System.out.println(e);
+}
+System.out.println(&quot;--------------------\nDelete Phase Completed\n--------------------\n&quot;);	
+
+stmt.close();
+conn.close();</stringProp>
             <stringProp name="BeanShellSampler.filename"></stringProp>
             <stringProp name="BeanShellSampler.parameters"></stringProp>
             <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
@@ -1117,7 +1262,6 @@ compareResults(ArrayList rowsOne, ArrayList rowsTwo, boolean insertResultAsSecon
 }
 
 Connection txnl = DataSourceElement.getConnection(${TRANSACTIONAL});
-
 Connection sec = DataSourceElement.getConnection(${SECONDARY});
 
 Statement stmtTxnl = txnl.createStatement();
@@ -1156,7 +1300,7 @@ while ((line = br.readLine()) != null){
 
         	response = response.concat(&quot;Comparing master result and insert data\n&quot;);
         	compareColumnList = bsh.shared.tableMetaData.get(tableName).get(&quot;InsertColumnSequence&quot;);
-		boolean one = compareResults(bsh.shared.insertResult.get(tableName).get(new ArrayList()), rowsTxnl, true, compareColumnList);
+		boolean one = compareResults(rowsTxnl, bsh.shared.insertResult.get(tableName).get(new ArrayList()), true, compareColumnList);
         	response = response.concat((one)?&quot;Master and Insert data matches!\n&quot; : &quot;Master and Insert data DO NOT match\n&quot;);
 
         	response = response.concat(&quot;-----------------------\nComparing master result and replica data\n&quot;);
@@ -1192,6 +1336,7 @@ for(int i=0; i&lt;results.size();i++){
     System.out.println(&quot;Query &quot;+i+&quot;:&quot;+results.get(i));
 }
 setResponse();
+br.close();
 stmtTxnl.close();
 stmtSec.close();
 sec.close();
@@ -1219,21 +1364,25 @@ System.out.println(&quot;--------------------\nDelete Phase\n-------------------
 String tableName = &quot;&quot;;
 PreparedStatement stmt = null;
 String sql = null;
-String shardingKey = null;
-ArrayList pkCols = null;
-int shardingKeyIndex = -1;
-pkColsIndex = new ArrayList();
+
+colListIndex = new ArrayList();
 dataTypeList = new ArrayList();
-boolean skInPk = false;
 
-prepareStmtSkeleton(String sk, ArrayList pkCols){
+generateColList(ArrayList content){
+	colList = new HashSet();
+	colList.add(tableMetaData.get(tableName).get(${SHARDINGKEY}));
+	colList.addAll(tableMetaData.get(tableName).get(${PRIMARYKEY}));
+	return colList;
+}
 
+prepareStmtSkeleton(ArrayList colList){
 	String initial = &quot;delete from &quot;+ tableName + &quot; where &quot;;
-	String params = skInPk ? &quot;&quot; : shardingKey + &quot;=? and &quot;;
+	String params = &quot;&quot;;
 	
-	for(int i=0; i&lt;pkCols.size(); i++){
-		params = params + pkCols.get(i) + &quot;=? and &quot;; 
+	for(int i=0; i&lt;colList.size(); i++){
+		params = params + colList.get(i) + &quot;=? and &quot;; 
 	}
+	
 	params = params.substring(0, params.length()-5);
 
 	return initial + params;
@@ -1267,55 +1416,49 @@ setData(ArrayList row, String dataType, int index, int place){
 
 Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
 tableMetaData = bsh.shared.tableMetaData;
-
-
-for(String tN: tableMetaData.keySet()){
-	tableName = tN;
-	System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
-	pkCols = tableMetaData.get(tableName).get(${PRIMARYKEY});
-	shardingKey = tableMetaData.get(tableName).get(${SHARDINGKEY});
-	skInPk = pkCols.contains(shardingKey);
-
-	sql = prepareStmtSkeleton(shardingKey, pkCols);	
-	stmt=conn.prepareStatement(sql);
+try{
+	for(String tN: tableMetaData.keySet()){
+		tableName = tN;
+		System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
+		
+		colList = new ArrayList(generateColList());
+		if(colList.isEmpty()){
+			continue;
+		}
+		sql = prepareStmtSkeleton(colList);	
+		stmt=conn.prepareStatement(sql);
+		System.out.println(sql);	
+		colListIndex.clear();
+		dataTypeList.clear();
+		
+		for(String colName: colList){
+			colListIndex.add(bsh.shared.colNameList.get(tableName).indexOf(colName));
+		}
+		
+		for(String colName: colList){
+			dataTypeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+		}
 	
-//	System.out.println(&quot;TableName: &quot; + tableName + &quot; shardingKey: &quot; + shardingKey + &quot; pkCols: &quot; + pkCols);
-
-	pkColsIndex.clear();
-	for(String pkCol: pkCols){
-//		System.out.println(bsh.shared.colNameList.get(tableName).indexOf(pkCol));
-		pkColsIndex.add(bsh.shared.colNameList.get(tableName).indexOf(pkCol));
-	}
-	shardingKeyIndex = bsh.shared.colNameList.get(tableName).indexOf(shardingKey);
-
-	dataTypeList.clear();
-	if(!skInPk){
-		dataTypeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(shardingKey).get(&quot;Type&quot;));
-	}
-	for(String pkCol: pkCols){
-		dataTypeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(pkCol).get(&quot;Type&quot;));
-	}
-
-	for(Map.Entry entry: bsh.shared.insertResult.get(tableName).entrySet()){
-		for(ArrayList row: entry.getValue()){
-			int place=0;
-			if(!skInPk){
-				setData(row, dataTypeList.get(place), shardingKeyIndex);
-				place++;
-			}
-			for(; place&lt;dataTypeList.size(); place++){
-				setData(row, dataTypeList.get(place), pkColsIndex.get(place), place);
-			}
-			try
-			{
-				stmt.executeUpdate();
-			}
-			catch (SQLException e){
-				System.out.println(&quot;Error: &quot; + e.getMessage());
-				IsSuccess=false;
+		for(Map.Entry entry: bsh.shared.insertResult.get(tableName).entrySet()){
+			for(int i=0; i&lt;${NUM_OF_TESTROWS}; i++){
+				int place=0;
+				for(; place&lt;dataTypeList.size(); place++){
+					setData(entry.getValue().get(i), dataTypeList.get(place), colListIndex.get(place), place);
+				}
+				try
+				{
+					stmt.executeUpdate();
+				}
+				catch (SQLException e){
+					System.out.println(&quot;Error: &quot; + e.getMessage());
+					IsSuccess=false;
+				}
 			}
 		}
 	}
+}
+catch(Exception e){
+	System.out.println(e);
 }
 System.out.println(&quot;--------------------\nDelete Phase Completed\n--------------------\n&quot;);	
 

@@ -1,6 +1,6 @@
-increment,nullable,default
-increment
+autoIncrement,nullable,default
+autoIncrement
 nullable
 default
-increment,nullable
-increment,default
+autoIncrement,nullable
+autoIncrement,default

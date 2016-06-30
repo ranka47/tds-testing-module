@@ -539,6 +539,7 @@ try{
 		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
 		tableMetaData = bsh.shared.tableMetaData;
 		colLevel = new HashMap();
+		tableLevel = new HashMap();
 		int colCount = 0;	
 
 //		printResultSet(rs);		
@@ -554,7 +555,6 @@ try{
 			colCount++;
 		}
 		
-		tableLevel = new HashMap();
 		tableLevel.put(&quot;colDetails&quot;,colLevel);
 		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
 		tableLevel.put(&quot;colCount&quot;, colCount);
@@ -571,10 +571,8 @@ try{
 
 		ResultSet rsSecIndex = dbmd.getIndexInfo(vars.get(&quot;DBNAME&quot;), null, tableName, false, false);
 		secIndex = getSecondaryIndexes(rsSecIndex);
-		
 		tableLevel.put(${SEC_INDEX}, secIndex);
-		System.out.println(&quot;Hi &quot; + secIndex + pk + colNameList);
-		System.out.println(&quot;I am here&quot;);
+
 		nonIndex = getNonIndexes(pk, colNameList, secIndex);
 		tableLevel.put(${NON_INDEX}, nonIndex);
 
@@ -1080,60 +1078,61 @@ String testCase = &quot;&quot;;
 br = new BufferedReader(new FileReader(testCaseFile));
 
 while ((testCase = br.readLine()) != null) {
-try{	String[] conditions = testCase.split(&quot;,&quot;);
-//	System.out.println(conditions.length);
-	for(String tN: bsh.shared.tableMetaData.keySet()){
-		tableName = tN;	
-//		System.out.println(tableName);
-		returnCols = bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;);
-
-		lineStart.setTxnlString(genLineStart(returnCols));
-		lineStart.setSecString(genLineStart(returnCols));
-		lineEnd.setTxnlString(&quot;&quot;);
-		lineEnd.setSecString(&quot;&quot;);
-		for(int i=0; i&lt;conditions.length; i+=3){	
-			String colType = conditions[i];
-			if(!(bsh.shared.colTypes.contains(colType))){
-				System.out.println(&quot;Invalid colType! State one of the following: &quot; + bsh.shared.colTypes);
-				break;	
-			}
-			String condType = conditions[i+1];
-			String conjunction=&quot;&quot;;
-			ArrayList colNames = getColName(colType);
-			if(colNames.isEmpty()){
-				System.out.println(&quot;No suitable Column of type &quot; + colType + &quot; exists in table &quot; + tableName);
-				continue;
-			}
-			/*
-			 * Add conjunction only after ensuring that the next condition exists and is not the first condition to be added.
-			 */
-			try{
-				if(!(lineEnd.getTxnlString().equals(&quot;&quot;))){
-					conjunction = conditions[i-1];
-					lineEnd.concatTxnlString(&quot; &quot; + conjunction + &quot; &quot;);
-					lineEnd.concatSecString(&quot; &quot; + conjunction + &quot; &quot;); 
-				}
-			}
-			catch(Exception e){
-				conjuncton = &quot;&quot;;
-			}
-			ArrayList colDataTypes = getDataType(colNames);
-//			System.out.println(&quot;colDataTypes: &quot; + colDataTypes);
-//			System.out.println(&quot;colNames: &quot; + colNames);
-			generateLineEnd(condType, colDataTypes, colNames);
-
-		}
-		if(lineEnd.hasString()){
-			outTxnl.println(lineStart.getTxnlString() + lineEnd.getTxnlString());
-			outSec.println(lineStart.getSecString() + lineEnd.getSecString());
-		}
-				
+	try{	
+		String[] conditions = testCase.split(&quot;,&quot;);
+//		System.out.println(conditions.length);
+		for(String tN: bsh.shared.tableMetaData.keySet()){
+			tableName = tN;	
+//			System.out.println(tableName);
+			returnCols = bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;);
 	
-	}}
-		catch(Exception e){
-			System.out.println(e);
-			IsSuccess = false;
+			lineStart.setTxnlString(genLineStart(returnCols));
+			lineStart.setSecString(genLineStart(returnCols));
+			lineEnd.setTxnlString(&quot;&quot;);
+			lineEnd.setSecString(&quot;&quot;);
+			for(int i=0; i&lt;conditions.length; i+=3){	
+				String colType = conditions[i];
+				if(!(bsh.shared.colTypes.contains(colType))){
+					System.out.println(&quot;Invalid colType! State one of the following: &quot; + bsh.shared.colTypes);
+					break;	
+				}
+				String condType = conditions[i+1];
+				String conjunction=&quot;&quot;;
+				ArrayList colNames = getColName(colType);
+				if(colNames.isEmpty()){
+					System.out.println(&quot;No suitable Column of type &quot; + colType + &quot; exists in table &quot; + tableName);
+					continue;
+				}
+				/*
+				 * Add conjunction only after ensuring that the next condition exists and is not the first condition to be added.
+				 */
+				try{
+					if(!(lineEnd.getTxnlString().equals(&quot;&quot;))){
+						conjunction = conditions[i-1];
+						lineEnd.concatTxnlString(&quot; &quot; + conjunction + &quot; &quot;);
+						lineEnd.concatSecString(&quot; &quot; + conjunction + &quot; &quot;); 
+					}
+				}
+				catch(Exception e){
+					conjuncton = &quot;&quot;;
+				}
+				ArrayList colDataTypes = getDataType(colNames);
+//				System.out.println(&quot;colDataTypes: &quot; + colDataTypes);
+//				System.out.println(&quot;colNames: &quot; + colNames);
+				generateLineEnd(condType, colDataTypes, colNames);
+			}
+			if(lineEnd.hasString()){
+				outTxnl.println(lineStart.getTxnlString() + lineEnd.getTxnlString());
+				outSec.println(lineStart.getSecString() + lineEnd.getSecString());
+			}
+					
+		
 		}
+	}
+	catch(Exception e){
+		System.out.println(e);
+		IsSuccess = false;
+	}
 }
 outTxnl.close();
 outSec.close();</stringProp>
