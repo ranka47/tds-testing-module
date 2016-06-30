@@ -13,6 +13,15 @@
           },
           "owner": "shipment"
         },
+        "ttracking_shipment_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "table": "ttracking_shipment_idx",
+            "from": "trackingid",
+            "to": "shipmentid"
+          },
+          "owner": "tshipment"
+        },
         "vindex_one": {
           "type": "lookup_hash",
           "params": {
@@ -67,6 +76,24 @@
           },
           "owner": "runsheet"
         },
+        "tdate_shipment_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "table": "tdate_shipment_idx",
+            "from": "createdatetime",
+            "to": "shipmentid"
+          },
+          "owner": "tshipment"
+        },
+        "tdate_runsheet_idx": {
+          "type": "lookup_hash",
+          "params": {
+            "table": "tdate_runsheet_idx",
+            "from": "createdatetime",
+            "to": "runsheetid"
+          },
+          "owner": "trunsheet"
+        },        
         "keyspace_idx": {
           "type": "numeric"
         }
@@ -86,6 +113,22 @@
           "auto_increment": {
             "column": "shipmentid",
             "sequence": "shipment_idx"
+          }
+        },
+        "tshipment": {
+          "column_vindexes": [{
+            "column": "shipmentid",
+            "name": "hash"
+          }, {
+            "column": "trackingid",
+            "name": "ttracking_shipment_idx"
+          }, {
+            "column": "createdatetime",
+            "name": "tdate_shipment_idx"
+          }],
+          "auto_increment": {
+            "column": "shipmentid",
+            "sequence": "tshipment_idx"
           }
         },
         "test_two":{
@@ -133,6 +176,19 @@
             "sequence": "runsheet_idx"
           }
         },
+        "trunsheet": {
+          "column_vindexes": [{
+            "column": "runsheetid",
+            "name": "hash"
+          }, {
+            "column": "createdatetime",
+            "name": "tdate_runsheet_idx"
+          }],
+          "auto_increment": {
+            "column": "runsheetid",
+            "sequence": "trunsheet_idx"
+          }
+        },
         "runsheet_shipments": {
           "column_vindexes": [{
             "column": "runsheetid",
@@ -140,6 +196,12 @@
           }]
         },
         "shipment_address": {
+          "column_vindexes": [{
+            "column": "shipmentid",
+            "name": "hash"
+          }]
+        },
+        "tshipment_address": {
           "column_vindexes": [{
             "column": "shipmentid",
             "name": "hash"

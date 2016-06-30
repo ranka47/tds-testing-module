@@ -9,3 +9,8 @@ create table vindex_one_unique(vindex_unique int not null, sk int not null, PRIM
 create table vindex_two_unique(vindex_unique int not null, sk int not null, PRIMARY KEY(vindex_unique));
 create table test_one_idx(id bigint,next_id bigint,cache bigint,increment bigint, primary key(id)) comment 'vitess_sequence';
 create table test_two_idx(id bigint,next_id bigint,cache bigint,increment bigint, primary key(id)) comment 'vitess_sequence';
+create table tshipment_idx(id bigint,next_id bigint,cache bigint,increment bigint, primary key(id)) comment 'vitess_sequence';
+create table ttracking_shipment_idx(trackingid varchar(15), shipmentid bigint(20), primary key(trackingid));
+create table tdate_shipment_idx(createdatetime datetime, shipmentid bigint(20), primary key(createdatetime, shipmentid));
+create table trunsheet_idx(id bigint, next_id bigint, cache bigint, increment bigint, primary key(id)) comment 'vitess_sequence';
+create table tdate_runsheet_idx(createdatetime datetime, runsheetid bigint(20), primary key(createdatetime, runsheetid));
