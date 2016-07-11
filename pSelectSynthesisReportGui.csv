@@ -1,6 +1,0 @@
-Label,# Samples,Average,Min,Max,90% Line,Std. Dev.,Error %,Throughput,KB/sec,Avg. Bytes
-init,1,15,15,15,15,0.00,100.00%,66.7,0.00,.0
-vschemaExtractor,1,51,51,51,51,0.00,0.00%,19.6,0.00,.0
-extractMetaData,1,2187,2187,2187,2187,0.00,0.00%,.5,0.00,.0
-BeanShell Sampler,2,67,57,78,78,10.50,100.00%,3.4,0.00,.0
-TOTAL,5,477,15,2187,78,854.94,60.00%,1.7,0.00,.0

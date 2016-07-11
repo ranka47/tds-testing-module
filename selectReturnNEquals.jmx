@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="TDS - Automation Testing Module" enabled="true">
+      <stringProp name="TestPlan.comments">testCase1: select [returnColumns, | * ] from tableName [where where_exp_with_and]</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CHARLIST" elementType="Argument">
+            <stringProp name="Argument.name">CHARLIST</stringProp>
+            <stringProp name="Argument.value">&quot;abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INTEGER" elementType="Argument">
+            <stringProp name="Argument.name">INTEGER</stringProp>
+            <stringProp name="Argument.value">0123456789</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
+            <stringProp name="Argument.value">${__P(datasize,10)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MACHINE" elementType="Argument">
+            <stringProp name="Argument.name">MACHINE</stringProp>
+            <stringProp name="Argument.value">txnl</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DBNAME" elementType="Argument">
+            <stringProp name="Argument.name">DBNAME</stringProp>
+            <stringProp name="Argument.value">shipment</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTGIVEN" elementType="Argument">
+            <stringProp name="Argument.name">INPUTGIVEN</stringProp>
+            <stringProp name="Argument.value">${__P(inputgiven,n)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTFILE" elementType="Argument">
+            <stringProp name="Argument.name">INPUTFILE</stringProp>
+            <stringProp name="Argument.value">${__P(inputfile,&quot;testCases/queryNReturnCols.csv&quot;)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IGNORETABLES" elementType="Argument">
+            <stringProp name="Argument.name">IGNORETABLES</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/ignoreTables.csv&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtTxnl.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_SEC" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_SEC</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtSec.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VSCHEMAFILE" elementType="Argument">
+            <stringProp name="Argument.name">VSCHEMAFILE</stringProp>
+            <stringProp name="Argument.value">&quot;shipmentVSchema.json&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIGINT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIGINT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">63</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TINYINT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">TINYINT_RANGE</stringProp>
+            <stringProp name="Argument.value">256</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">INT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">31</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREFIX_STRING" elementType="Argument">
+            <stringProp name="Argument.name">PREFIX_STRING</stringProp>
+            <stringProp name="Argument.value">&quot;TestData&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1970-01-01 00:00:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 23:59:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1969-12-31 18:30:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 18:29:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_ACCU" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_ACCU</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IST_TO_UTC" elementType="Argument">
+            <stringProp name="Argument.name">IST_TO_UTC</stringProp>
+            <stringProp name="Argument.value">-19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="UTC_TO_IST" elementType="Argument">
+            <stringProp name="Argument.name">UTC_TO_IST</stringProp>
+            <stringProp name="Argument.value">19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX</stringProp>
+            <stringProp name="Argument.value">&quot;vindex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEC_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">SEC_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;secIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NON_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">NON_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;nonIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PRIMARYKEY" elementType="Argument">
+            <stringProp name="Argument.name">PRIMARYKEY</stringProp>
+            <stringProp name="Argument.value">&quot;pk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SHARDINGKEY" elementType="Argument">
+            <stringProp name="Argument.name">SHARDINGKEY</stringProp>
+            <stringProp name="Argument.value">&quot;sk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HOSTNAME_SECONDARY" elementType="Argument">
+            <stringProp name="Argument.name">HOSTNAME_SECONDARY</stringProp>
+            <stringProp name="Argument.value">ekart-tds-aesop2.nm.flipkart.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HOSTNAME_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">HOSTNAME_TXNL</stringProp>
+            <stringProp name="Argument.value">ekart-tds-0001.nm.flipkart.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DRIVER_CLASS" elementType="Argument">
+            <stringProp name="Argument.name">DRIVER_CLASS</stringProp>
+            <stringProp name="Argument.value">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TESTCASE_SEPARATOR" elementType="Argument">
+            <stringProp name="Argument.name">TESTCASE_SEPARATOR</stringProp>
+            <stringProp name="Argument.value">&quot;;&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PARAMETER_SEPARATOR" elementType="Argument">
+            <stringProp name="Argument.name">PARAMETER_SEPARATOR</stringProp>
+            <stringProp name="Argument.value">&quot;,&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_STAR" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_STAR</stringProp>
+            <stringProp name="Argument.value">&quot;*&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_AND_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_AND_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; and &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_WHERE_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_WHERE_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; where &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_VALUES_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_VALUES_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; values &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_SELECT" elementType="Argument">
+            <stringProp name="Argument.name">SQL_SELECT</stringProp>
+            <stringProp name="Argument.value">&quot; select &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_FROM_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_FROM_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; from &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_INSERT" elementType="Argument">
+            <stringProp name="Argument.name">SQL_INSERT</stringProp>
+            <stringProp name="Argument.value">&quot; insert into &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BRACKET_OPEN" elementType="Argument">
+            <stringProp name="Argument.name">BRACKET_OPEN</stringProp>
+            <stringProp name="Argument.value">&quot;(&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BRACKET_CLOSE" elementType="Argument">
+            <stringProp name="Argument.name">BRACKET_CLOSE</stringProp>
+            <stringProp name="Argument.value">&quot;)&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREPARESTMT_SYMBOL" elementType="Argument">
+            <stringProp name="Argument.name">PREPARESTMT_SYMBOL</stringProp>
+            <stringProp name="Argument.value">&quot;?&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="EQUALS" elementType="Argument">
+            <stringProp name="Argument.name">EQUALS</stringProp>
+            <stringProp name="Argument.value">&quot;=&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TO_DATE_FUNC" elementType="Argument">
+            <stringProp name="Argument.name">TO_DATE_FUNC</stringProp>
+            <stringProp name="Argument.value">&quot;TO_DATE&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="STR_DATETIME_APOST" elementType="Argument">
+            <stringProp name="Argument.name">STR_DATETIME_APOST</stringProp>
+            <stringProp name="Argument.value">&quot;&apos;&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_DELETE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_DELETE</stringProp>
+            <stringProp name="Argument.value">&quot; delete&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DEREFERENCE" elementType="Argument">
+            <stringProp name="Argument.name">DEREFERENCE</stringProp>
+            <stringProp name="Argument.value">&quot;.&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TXNL" elementType="Argument">
+            <stringProp name="Argument.name">TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;txnl&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SECONDARY" elementType="Argument">
+            <stringProp name="Argument.name">SECONDARY</stringProp>
+            <stringProp name="Argument.value">&quot;sec&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Master TDS" enabled="true">
+        <stringProp name="dataSource">master</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">false</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=master</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Slave TDS" enabled="true">
+        <stringProp name="dataSource">slave</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">false</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=replica</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Transactional Data Store" enabled="true">
+        <stringProp name="dataSource">txnl</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Secondary Data Store" enabled="true">
+        <stringProp name="dataSource">sec</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select * from dummy</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=archival</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="prepPhase" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1465147238000</longProp>
+        <longProp name="ThreadGroup.end_time">1465147238000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="init" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+bsh.shared.tableMetaData = new HashMap();
+bsh.shared.insertResult = new HashMap();
+bsh.shared.colNameList = new HashMap();
+bsh.shared.queryValues = new ArrayList();
+bsh.shared.ignoreTables = new ArrayList();
+bsh.shared.ignoreColumns = new HashMap();
+bsh.shared.ignoreTables = new ArrayList();
+bsh.shared.autoIncrement = new HashMap();
+/*
+ * Initialising ColumnTypes
+ */
+colTypes = new ArrayList();
+colTypes.add(${VINDEX});
+colTypes.add(${SEC_INDEX});
+colTypes.add(${NON_INDEX});
+colTypes.add(${PRIMARYKEY});
+colTypes.add(${SHARDINGKEY});
+bsh.shared.colTypes = colTypes;
+
+br = new BufferedReader(new FileReader(${IGNORETABLES}));
+while ((line = br.readLine()) != null) {
+	bsh.shared.ignoreTables.add(line);	
+}</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="vschemaExtractor" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+/*
+ * Sharing Key Index Type ArrayList
+ */
+shardingKeyIndexType = new ArrayList();
+shardingKeyIndexType.add(&quot;hash&quot;);
+shardingKeyIndexType.add(&quot;binarymd5&quot;);
+shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
+
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
+
+String tableName = &quot;&quot;;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(new FileReader(${VSCHEMAFILE}));
+JSONObject jsonObject = (JSONObject) obj;
+JSONObject shardingKey = new JSONObject();
+
+vindex = new HashMap();
+vindexUnique = new HashMap();
+
+boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
+JSONObject tables = jsonObject.get(&quot;tables&quot;);
+JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
+Iterator keys = tables.keySet().iterator();
+
+getColumnVindexes(JSONObject tableDetails){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
+//			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
+		}
+		else{
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+    }
+    
+}
+
+getColumnUniqueVindexes(JSONObject tableDetails){
+	vindexUnique.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(vindexUniqueType.contains(type)){
+			vindexUnique.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+	}
+}
+
+getAutoIncrement(JSONObject tableDetails){
+	/*
+	 * Written with the assumption that at max only one auto_increment column will be defined
+	 */
+	 try{
+	 	String colName = tableDetails.get(&quot;auto_increment&quot;).get(&quot;column&quot;);
+	 	hashSet = new HashSet();
+	 	hashSet.add(colName);
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+	 catch(Exception e){
+		hashSet = new HashSet();
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+
+}
+
+getValues(String tableName){
+    	getColumnVindexes(tables.get(tableName));
+  	getAutoIncrement(tables.get(tableName));
+	getColumnUniqueVindexes(tables.get(tableName));	
+}
+
+while(keys.hasNext()) {
+	tableName = (String)keys.next();
+	if(bsh.shared.ignoreTables.contains(tableName)){
+		continue;
+	}
+	getValues(tableName);
+}
+
+bsh.shared.vindex = vindex;
+bsh.shared.shardingKey = shardingKey;
+bsh.shared.vindexUnique = vindexUnique;
+System.out.println(&quot;sk &quot; + shardingKey);
+System.out.println(&quot;vindex &quot; + vindex);
+System.out.println(&quot;vindexUnique &quot; + vindexUnique);
+System.out.println(&quot;autoIncrement &quot; + bsh.shared.autoIncrement);
+
+//System.out.println(&quot;ShardedStatus: &quot; + shardedStatus);
+//System.out.println(&quot;Tables: &quot; + tables);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="queryColsReturnCols" enabled="true">
+          <stringProp name="BeanShellSampler.query">/*
+ * Query Columns: Columns on which where clause will be generated. 
+ * Either specify the columns on which query is to be generated or let the code decide randomly  
+ * Format: TableName ; QueryColumns; ReturnCols
+ * 	TableName: Name of the table
+ * 	QueryColumns: Name of the columns on which query will be generated. Delimited by comma(,)
+ * 	ReturnColumns: Columns that you want to be returned.
+ * 			 
+ */
+try{
+	if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;n&quot;)){
+	fw = new FileWriter(${INPUTFILE}, false);
+	bw = new BufferedWriter(fw);
+	out = new PrintWriter(bw);
+	Random rand = new Random();
+	for(String tableName: bsh.shared.shardingKey.keySet()){
+		String queryCols = &quot;&quot;;
+
+		if(rand.nextInt(2) == 1){
+			queryCols = queryCols + bsh.shared.shardingKey.get(tableName) + ${PARAMETER_SEPARATOR};	
+		}
+		
+		if(bsh.shared.vindex.get(tableName) != null){
+			int numOfQueryCols = rand.nextInt(bsh.shared.vindex.get(tableName).size() + 1);
+			queryColsArray = new ArrayList(bsh.shared.vindex.get(tableName));
+			Collections.shuffle(queryColsArray);
+
+			for(String col: queryColsArray.subList(0, numOfQueryCols)){
+				queryCols = queryCols + col + ${PARAMETER_SEPARATOR};
+			}
+		}
+		if(queryCols.length() &gt; 0){
+			queryCols = queryCols.substring(0, queryCols.length() - 1);
+		}
+
+		out.println(tableName + ${TESTCASE_SEPARATOR} + queryCols + ${TESTCASE_SEPARATOR} + ${SELECT_STAR});
+	}
+	out.close();
+}
+}
+catch(Exception e){
+	IsSuccess = false;
+	System.out.println(e);
+}</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="extractMetaData" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+Connection conn;
+
+getColumnAttributes(ResultSet rs){
+	attrLevel = new HashMap();
+	attrLevel.put(&quot;Type&quot;, rs.getString(&quot;TYPE_NAME&quot;));
+	attrLevel.put(&quot;Nullable&quot;, rs.getString(&quot;IS_NULLABLE&quot;));
+	attrLevel.put(&quot;Default&quot;, rs.getString(&quot;COLUMN_DEF&quot;));
+	attrLevel.put(&quot;Length&quot;, rs.getInt(&quot;COLUMN_SIZE&quot;));
+	attrLevel.put(&quot;AutoIncrement&quot;, rs.getString(&quot;IS_AUTOINCREMENT&quot;));
+	attrLevel.put(&quot;ColumnNumber&quot;, rs.getInt(&quot;ORDINAL_POSITION&quot;));
+	return attrLevel;
+}
+
+generateColNameList(int colCount, HashMap colLevel){
+	colNameList = new ArrayList(colCount);
+	for(int i=0; i&lt;colCount;i++){
+		colNameList.add(null);
+	}
+	for(String colName: colLevel.keySet()){
+		colNameList.set(colLevel.get(colName).get(&quot;ColumnNumber&quot;) - 1, colName);
+	}
+	return colNameList;
+}
+
+getSecondaryIndexes(ResultSet rsSecIndex){
+	secIndex = new ArrayList();
+	while(rsSecIndex.next()){
+		if(rsSecIndex.getString(&quot;INDEX_NAME&quot;).equals(&quot;PRIMARY&quot;)){
+			continue;
+		}
+		else{
+			secIndex.add(rsSecIndex.getString(&quot;COLUMN_NAME&quot;));
+		}
+	}
+	System.out.println(&quot;secIndex&quot;+ secIndex);
+	return secIndex;
+}
+
+getNonIndexes(ArrayList pk, ArrayList colNameList, ArrayList secIndex){
+	nonIndex = new ArrayList();
+	for(String colName: colNameList){
+		if(pk.contains(colName) || secIndex.contains(colName) || bsh.shared.vindex.get(tableName).contains(colName) || bsh.shared.shardingKey.get(tableName).equals(colName)){
+			continue;
+		}
+		else{
+			nonIndex.add(colName);
+		}
+	}
+	return nonIndex;
+}
+
+
+getPrimaryKeys(ResultSet rspk){
+	pk = new ArrayList();
+	while(rspk.next()){
+		try{
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));	
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int i=pk.size(); i&lt;rspk.getInt(&quot;KEY_SEQ&quot;); i++){
+				pk.add(null);
+			}
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));
+			//System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+		catch(Exception e){
+			System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+	}
+	return pk;
+}
+
+getQueryColumns(String[] content){
+	queryCols = new ArrayList();
+	if(content[1].equals(&quot;&quot;)){
+	}
+	else{
+		queryCols.addAll(Arrays.asList(content[1].split(${PARAMETER_SEPARATOR})));
+	}
+	return queryCols;
+}
+
+getReturnColumns(String[] content, ArrayList colNameList, int colCount){
+	returnCols = new ArrayList();
+	if(content[2].equals(${SELECT_STAR})){
+	}
+	else{
+		returnCols.addAll(Arrays.asList(content[2].split(${PARAMETER_SEPARATOR})));
+	}
+	return returnCols;
+}
+
+printResultSet(ResultSet rs){
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int colCount = rsmd.getColumnCount();
+	while(rs.next()){
+		for (int i = 1; i &lt;= colCount; i++) {
+	        if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	
+	    }
+	        System.out.println(&quot;\n&quot;);
+	}
+}
+
+try{
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	br = new BufferedReader(new FileReader(${INPUTFILE}));
+	conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+	System.out.println(&quot;Connection established!&quot;);
+	
+	DatabaseMetaData dbmd = conn.getMetaData();
+
+	while ((line = br.readLine()) != null) {
+		System.out.println(line);
+		String[] content = line.split(${TESTCASE_SEPARATOR});
+		tableName = content[0];
+		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
+		tableMetaData = bsh.shared.tableMetaData;
+		colLevel = new HashMap();
+		int colCount = 0;	
+
+//		printResultSet(rs);	
+		System.out.println(&quot;--------------------&quot;+tableName+ &quot;--------------------&quot;);
+		
+		while(rs.next()){
+
+//Always declare new HashMap else use remove() method of hashMap. Because if clear() method is used then the element last added
+//will get copied as many times as the number of elements in colList due to addition of reference in the colList in add() method. 
+			HashMap attrLevel = getColumnAttributes(rs);
+			colLevel.put(rs.getString(&quot;COLUMN_NAME&quot;), attrLevel);	
+			colCount++;
+		}
+		
+		tableLevel = new HashMap();
+		tableLevel.put(&quot;colDetails&quot;,colLevel);
+		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
+		tableLevel.put(&quot;colCount&quot;, colCount);
+
+		colNameList = generateColNameList(colCount, colLevel);
+		bsh.shared.colNameList.put(tableName, colNameList);
+
+		ResultSet rspk = dbmd.getPrimaryKeys(vars.get(&quot;DBNAME&quot;), null, tableName);		
+//		printResultSet(rspk);
+
+		pk = getPrimaryKeys(rspk);
+		tableLevel.put(${PRIMARYKEY}, pk);
+
+		ArrayList queryCols = getQueryColumns(content);
+		tableLevel.put(&quot;QueryColumns&quot;, queryCols);
+
+		ArrayList returnCols = getReturnColumns(content, colNameList, colCount); 
+		tableLevel.put(&quot;ReturnColumns&quot;, returnCols);
+
+		ResultSet rsSecIndex = dbmd.getIndexInfo(vars.get(&quot;DBNAME&quot;), null, tableName, false, false);
+		secIndex = getSecondaryIndexes(rsSecIndex);
+		tableLevel.put(${SEC_INDEX}, secIndex);
+
+		nonIndex = getNonIndexes(pk, colNameList, secIndex);
+		tableLevel.put(${NON_INDEX}, nonIndex);
+		
+		tableMetaData.put(tableName,tableLevel);	
+		bsh.shared.tableMetaData = tableMetaData;
+	}
+
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess=false;
+}
+finally{
+	conn.close();
+}
+System.out.println(&quot;Connection closed!&quot;);
+System.out.println(&quot;tableMetaData &quot; + bsh.shared.tableMetaData);
+System.out.println(&quot;colNameList &quot; + bsh.shared.colNameList);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="selectReturnColsWhereColsEquals" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1464357186000</longProp>
+        <longProp name="ThreadGroup.end_time">1464357186000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="TestPlan.comments">SELECT &lt;column list&gt; FROM table_name WHERE column1 = value1 AND column2 = value2 AND ...</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="insertUsingPreparedStatement" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.*;
+import java.lang.Math.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+System.out.println(&quot;--------------------\nInsert Phase\n--------------------\n&quot;);
+Random rand = new Random();
+String tableName = &quot;&quot;;
+
+randomString(Integer length){
+	StringBuffer randStr = new StringBuffer();
+    	for(int j=0; j&lt;length; j++)
+    	{
+    		int charListLength = ${CHARLIST}.length();
+        	int number = rand.nextInt(charListLength);
+        	char ch = ${CHARLIST}.charAt(number);
+        	randStr.append(ch);
+    	}
+    	return randStr;
+}
+randomTimestamp(){
+    	long offset = Timestamp.valueOf(${DATETIME_MIN_IST}).getTime();
+    	long end = Timestamp.valueOf(${DATETIME_MAX_IST}).getTime();
+    	long diff = end - offset + 1;
+
+	/* Prevention of random generation of milliseconds */
+    	Timestamp rand = new Timestamp(((offset + (long)(Math.random() * diff))/${DATETIME_ACCU})*${DATETIME_ACCU});
+    	return rand;
+}
+randomParameter(PreparedStatement stmt, String dataType, Integer length, Integer place){
+	switch(dataType){
+     	case &quot;BIGINT&quot;:
+            //strconv.ParseInt used at the backend. Hence max value of int can be 2^63 - 1
+			BigInteger b = new BigInteger(${BIGINT_BIT_RANGE}, rand);
+//			long b = b.longValue();
+			stmt.setLong(place, b.longValue());
+			return b.toString();
+		case &quot;INT&quot;:
+			BigInteger b = new BigInteger(${INT_BIT_RANGE}, rand);
+//			long b = b.longValue();
+			stmt.setLong(place, b.longValue());
+			return b.toString();
+		case &quot;VARCHAR&quot;:
+        	  	String str = randomString(length).toString();
+        	  	stmt.setString(place, str);
+            	return str.toString();
+        	case &quot;TINYINT&quot;:
+        		Integer b = rand.nextInt(${TINYINT_RANGE});
+        	  	stmt.setInt(place, b);
+            	return b.toString();
+        	case &quot;BIT&quot;:
+        	  	Integer b = rand.nextInt(${BIT_RANGE});
+        	  	stmt.setInt(place, b);
+            	return b.toString();
+        	case &quot;DATETIME&quot;:
+            	Timestamp tmsp = randomTimestamp();
+            	stmt.setTimestamp(place, tmsp);
+            	return tmsp.toString();
+        	default:
+            	System.out.println(&quot;Random data cannot be generated for data type &quot; + dataType);
+    }
+}
+generateSQL(PreparedStatement stmt, HashMap tableDetails, HashMap insertTableLevel){
+	HashMap cols = tableDetails.get(&quot;colDetails&quot;);
+	
+	String key = null;
+	String value = null;
+	ArrayList colNameList = bsh.shared.colNameList.get(tableName);
+//	System.out.println(&quot;ColNameList: &quot; + cols);
+	
+	rowKey = new ArrayList(tableDetails.get(&quot;QueryColumns&quot;).size());
+	for(int i=0; i&lt;tableDetails.get(&quot;QueryColumns&quot;).size(); i++){
+	   rowKey.add(null);
+	}
+	
+	rowData = new ArrayList(tableDetails.get(&quot;colCount&quot;));
+	for(int i=0; i&lt;tableDetails.get(&quot;colCount&quot;); i++){
+	   rowData.add(null);
+	}
+
+	for(Map.Entry col: cols.entrySet()){
+		key = col.getKey();
+		value =  randomParameter(stmt, col.getValue().get(&quot;Type&quot;), col.getValue().get(&quot;Length&quot;), colNameList.indexOf(key) + 1);
+		rowData.set(colNameList.indexOf(key), value);
+		int place = tableDetails.get(&quot;QueryColumns&quot;).indexOf(key);
+		if(place&gt;=0){
+			rowKey.set(place, value);
+		}
+	 } 
+	
+	if(insertTableLevel.containsKey(rowKey)){
+	   	insertTableLevel.get(rowKey).add(rowData);
+	}
+	else{
+		ArrayList temp = new ArrayList();
+		insertTableLevel.put(rowKey, temp);
+		insertTableLevel.get(rowKey).add(rowData);
+	}
+	//  bsh.shared.insertTableLevel.put(tableName, colData);    
+	return stmt;
+}
+
+prepareStmtSkeleton(ArrayList colNames){
+	statement = new StringBuilder(${SQL_INSERT});
+	statement.append(tableName);
+	statement.append(${BRACKET_OPEN});
+	clause = new StringBuilder(${SQL_VALUES_CLAUSE});
+	clause.append(${BRACKET_OPEN});
+
+	for(String colName: colNames){
+		statement.append(colName + ${PARAMETER_SEPARATOR});
+		clause.append(${PREPARESTMT_SYMBOL} + ${PARAMETER_SEPARATOR});
+	}
+	if(colNames.size() &gt; 0){
+		statement = statement.deleteCharAt(statement.length() - ${PARAMETER_SEPARATOR}.length());
+		clause = clause.deleteCharAt(clause.length() - ${PARAMETER_SEPARATOR}.length());
+		statement.append(${BRACKET_CLOSE});
+		clause.append(${BRACKET_CLOSE});
+	}
+	statement.append(clause.toString());
+	return statement.toString();
+}
+
+Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+
+PreparedStatement stmt = null;
+
+for(String tN: bsh.shared.tableMetaData.keySet()){
+	tableName = tN;
+	System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
+	String sql = prepareStmtSkeleton(bsh.shared.colNameList.get(tableName));	
+	stmt=conn.prepareStatement(sql);
+	System.out.println(sql);
+	bsh.shared.insertResult.put(tableName, new HashMap());
+	for(int i=0; i&lt; ${NUM_OF_TESTROWS}; i++){
+		HashMap insertTableLevel = bsh.shared.insertResult.get(tableName);
+		stmt = generateSQL(stmt, bsh.shared.tableMetaData.get(tableName), insertTableLevel);
+		bsh.shared.insertResult.put(tableName, insertTableLevel);
+
+//		System.out.println(&quot;Hi insertTableLevel &quot; + insertTableLevel);
+		try{
+		      stmt.executeUpdate();
+//		      System.out.println(&quot;Row &quot;+ i + &quot;: Inserted Successfully!&quot;);
+		}
+		catch (SQLException e){
+		   	log.error(e.getMessage());
+	     	System.out.println(&quot;Row &quot;+ i + &quot;: Insert Failed!\nCheck log for more info&quot;);		   
+		   	IsSuccess=false;
+		}
+	}
+}
+//System.out.println(&quot;insertResult &quot; + bsh.shared.insertResult);
+stmt.close();
+conn.close();
+System.out.println(&quot;--------------------\nInsert Phase Completed\n--------------------\n&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="selectStmtTxnl" enabled="true">
+          <stringProp name="BeanShellSampler.query">fwTxnl = new FileWriter(${SELECT_FILE_TXNL}, false);
+bwTxnl = new BufferedWriter(fwTxnl);
+outTxnl = new PrintWriter(bwTxnl);
+String tableName = &quot;&quot;;
+
+genInit(ArrayList returnCols){
+	initial = new StringBuilder(${SQL_SELECT});
+	if(returnCols.isEmpty()){
+		initial.append(${SELECT_STAR} + ${SQL_FROM_CLAUSE});
+		initial.append(vars.get(&quot;DBNAME&quot;) + ${DEREFERENCE} + tableName);
+	}
+	else{
+		String temp = &quot;&quot;;
+		for(String col : returnCols){
+			temp = temp + col + ${PARAMETER_SEPARATOR};
+		}
+		temp = temp.substring(0, temp.length() - ${PARAMETER_SEPARATOR}.length());
+		initial.append(temp + ${SQL_FROM_CLAUSE});
+		initial.append(vars.get(&quot;DBNAME&quot;) + ${DEREFERENCE} + tableName);
+	}
+	return initial.toString();
+}
+
+genLater(ArrayList queryValue, ArrayList queryCols){
+	typeList = new ArrayList();
+	for(String colName: bsh.shared.colNameList.get(tableName)){
+		typeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+	}
+	
+	String later = &quot;&quot;;
+	if(queryCols.size() &gt; 0){
+		later = later + ${SQL_WHERE_CLAUSE};
+		for(int i=0; i&lt;queryValue.size(); i++){
+//			System.out.println(&quot;TypeList: &quot; + typeList + queryValue.size());
+			String dataType = typeList.get(bsh.shared.colNameList.get(tableName).indexOf(queryCols.get(i))); 
+//			System.out.println(queryCols.get(i));
+			if(dataType.equals(&quot;DATETIME&quot;)){
+//				System.out.println(&quot;writing for datetime&quot;);
+				later = later + queryCols.get(i) + ${EQUALS} + ${STR_DATETIME_APOST} + queryValue.get(i) + ${EQUALS} + ${STR_DATETIME_APOST} +  ${SQL_AND_CLAUSE}; 
+			}
+			else if (dataType.equals(&quot;VARCHAR&quot;) || dataType.equals(&quot;CHAR&quot;)){
+				later = later + queryCols.get(i) + ${EQUALS} + ${STR_DATETIME_APOST} + queryValue.get(i) + ${STR_DATETIME_APOST} + ${SQL_AND_CLAUSE};
+			}			
+			else{
+				later = later + queryCols.get(i) + ${EQUALS} + queryValue.get(i) + ${SQL_AND_CLAUSE}; 
+			}
+		}
+		later = later.substring(0, later.length() - ${SQL_AND_CLAUSE}.length());
+	}	
+	return later;
+}
+
+generateSQL(ArrayList queryValue, ArrayList queryCols, ArrayList returnCols){
+
+	String initial = genInit(returnCols);
+	String later = genLater(queryValue, queryCols);
+	return initial + later;
+}
+try{
+	queryValues = new ArrayList();
+	for(String tN: bsh.shared.tableMetaData.keySet()){
+		tableName = tN;
+		queryCols = bsh.shared.tableMetaData.get(tableName).get(&quot;QueryColumns&quot;);
+		returnCols = bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;);
+		for(ArrayList queryValue: bsh.shared.insertResult.get(tableName).keySet()){
+			queryValues.add(queryValue);
+			outTxnl.println(tableName + ${TESTCASE_SEPARATOR} + generateSQL(queryValue, queryCols, returnCols));
+		}
+	}
+	bsh.shared.queryValues = queryValues;
+}
+catch(Exception e){
+	System.out.println(e);
+}
+//System.out.println(&quot;QueryValues: &quot; + queryValues);
+outTxnl.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="selectStmtArchival" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+fwSec = new FileWriter(${SELECT_FILE_SEC}, false);
+bwSec = new BufferedWriter(fwSec);
+outSec = new PrintWriter(bwSec);
+String tableName = &quot;&quot;;
+
+genInit(ArrayList returnCols){
+	initial = new StringBuilder(${SQL_SELECT});
+	if(returnCols.isEmpty()){
+		initial.append(${SELECT_STAR} + ${SQL_FROM_CLAUSE});
+		initial.append(vars.get(&quot;DBNAME&quot;) + ${DEREFERENCE} + tableName);
+	}
+	else{
+		String temp = &quot;&quot;;
+		for(String col : returnCols){
+			temp = temp + col + ${PARAMETER_SEPARATOR};
+		}
+		temp = temp.substring(0, temp.length() - ${PARAMETER_SEPARATOR}.length());
+		initial.append(temp + ${SQL_FROM_CLAUSE});
+		initial.append(vars.get(&quot;DBNAME&quot;) + ${DEREFERENCE} + tableName);
+	}
+	return initial.toString();
+}
+
+genLater(ArrayList queryValue, ArrayList queryCols){
+	typeList = new ArrayList(); 
+	for(String colName: bsh.shared.colNameList.get(tableName)){
+		typeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+	}
+
+	String later = &quot;&quot;;
+	if(queryCols.size() &gt; 0){
+		later = later + ${SQL_WHERE_CLAUSE};
+		for(int i=0; i&lt;queryValue.size(); i++){
+			String dataType = typeList.get((bsh.shared.colNameList.get(tableName).indexOf(queryCols.get(i)))); 
+			if(dataType.equals(&quot;DATETIME&quot;)){
+				Timestamp str = new Timestamp((Timestamp.valueOf(queryValue.get(i))).getTime() + ${IST_TO_UTC});
+				later = later + queryCols.get(i) + ${EQUALS} + ${TO_DATE_FUNC} + ${BRACKET_OPEN}+ ${STR_DATETIME_APOST} + str + ${STR_DATETIME_APOST} + ${BRACKET_CLOSE} + ${SQL_AND_CLAUSE};
+			}
+			else if (dataType.equals(&quot;VARCHAR&quot;) || dataType.equals(&quot;CHAR&quot;)){
+				later = later + queryCols.get(i) + ${EQUALS} + ${STR_DATETIME_APOST} + queryValue.get(i) + ${STR_DATETIME_APOST} +  ${SQL_AND_CLAUSE};
+			}
+			else{
+				later = later + queryCols.get(i) + ${EQUALS} + queryValue.get(i) + ${SQL_AND_CLAUSE};
+			}
+		}
+		later = later.substring(0, later.length() - ${SQL_AND_CLAUSE}.length());
+	}
+	return later;
+}
+
+generateSQL(ArrayList queryValue, ArrayList queryCols, ArrayList returnCols){
+
+	String initial = genInit(returnCols);
+	String later = genLater(queryValue, queryCols);
+	return initial + later;
+}
+
+for(String tN: bsh.shared.tableMetaData.keySet()){
+	tableName = tN;
+	queryCols = bsh.shared.tableMetaData.get(tableName).get(&quot;QueryColumns&quot;);
+	returnCols = bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;);
+	for(ArrayList queryValue: bsh.shared.insertResult.get(tableName).keySet()){
+		outSec.println(tableName + ${TESTCASE_SEPARATOR} + generateSQL(queryValue, queryCols, returnCols));
+	}
+}
+outSec.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="selectNCompare" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.BigInteger;
+import java.lang.Math.abs;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.sql.Timestamp;
+import java.util.Date;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang.time.FastDateFormat;
+String tableName = &quot;&quot;;
+System.out.println(&quot;--------------------\nValidation Phase Start\n--------------------\n&quot;);
+response = &quot;&quot;;
+
+setResponse(){
+    SampleResult.setResponseData(response);
+}
+
+/*
+ * 
+ */
+processResultSet(ResultSet result, ArrayList returnCols, boolean secStoreAsResult){
+	ResultSetMetaData rsmd = result.getMetaData();
+     int columnCount = rsmd.getColumnCount();
+//      System.out.println(&quot;ColCount: &quot; + columnCount);
+//      System.out.println(&quot;TableName &quot; + tableName);
+        
+     rows = new ArrayList();
+     while(result.next()){
+     	row = new ArrayList();
+          int i=1;
+          for(i=1; i&lt;=columnCount; i++){
+          	row.add(null);
+         	}
+          i=1;
+        	boolean valid = true;
+        	while(i&lt;=columnCount){
+          	String colName = rsmd.getColumnName(i).toLowerCase();
+/*
+ * Reporting invalid columns if all the NON-NULLABLE columns are null
+ */
+               if((result.getObject(i) == null) &amp;&amp; bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Nullable&quot;).equals(&quot;NO&quot;)){
+                    System.out.println(&quot;Not a valid Row!&quot;);
+                    valid = false;
+                    break;
+               }
+/*
+ * DataType Specific processing
+ * TIMESTAMP is returned in UTC from secondary store. So converted to IST
+ */
+               if(result.getObject(i) != null){
+               	if(rsmd.getColumnTypeName(i).equals(&quot;TIMESTAMP&quot;) &amp;&amp; secStoreAsResult){
+                    Timestamp str = new Timestamp((Timestamp.valueOf(result.getString(i))).getTime() + ${UTC_TO_IST});
+                        row.set(returnCols.indexOf(rsmd.getColumnName(i).toLowerCase()), str.toString());
+                    }
+                    else{
+                        row.set(returnCols.indexOf(rsmd.getColumnName(i).toLowerCase()), result.getString(i));
+                    }
+                }
+                else{
+                    row.set(returnCols.indexOf(rsmd.getColumnName(i).toLowerCase()), &quot;null&quot;);
+                }
+                i++;
+            }
+            if(valid){
+                rows.add(row);
+            }
+        }
+        return rows;
+}
+
+compareDateTime(String one, String two){
+	boolean same = true;
+//	System.out.println(&quot;Hi &quot; + one + two);
+	if(one == null){
+		if(Objects.equals(one, two)){
+		}
+		else{
+			same = false;
+		}
+	}
+	else{	
+		long date1 = Timestamp.valueOf(one).getTime();
+	     long date2 = Timestamp.valueOf(two).getTime();
+	     long diff = date1 - date2;
+	     if(diff &lt; ${DATETIME_ACCU} &amp;&amp; diff &gt; -${DATETIME_ACCU}){
+	     }
+	     else{
+	     	same=false;
+	     }
+	}
+     return same;
+}
+
+compareRow(ArrayList rowOne, ArrayList rowTwo, ArrayList returnCols){
+	typeList = new ArrayList();
+    	for(String colName: returnCols){
+     	typeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+    	}
+    	if(typeList.size() == 0){
+     	for(String colName: bsh.shared.colNameList.get(tableName)){
+          	typeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+        	}       
+    	}
+	
+	boolean same=true;
+
+     for(int i=0; i&lt;rowOne.size(); i++){
+		//add any type specific code here using typeList
+		boolean compare = true;
+          if(!(typeList.get(i).equals(&quot;DATETIME&quot;))){
+          	compare = Objects.equals(rowOne.get(i), rowTwo.get(i));
+          }
+          else{
+          	compare = compareDateTime(rowOne.get(i), rowTwo.get(i));
+          }
+          if(compare){
+//			System.out.println(&quot;YES &quot; + &quot;ValueOne: &quot; + rowOne.get(i) + &quot; ValueTwo: &quot; + rowTwo.get(i));
+          	continue;
+          }
+          else{
+          	same = false;
+//            	System.out.println(&quot;NO &quot; + &quot;ValueOne: &quot; + rowOne.get(i) + &quot; ValueTwo: &quot; + rowTwo.get(i));
+          	break;
+          }
+	}
+	return same;
+}
+
+compareResults(ArrayList rowsOne, ArrayList rowsTwo, boolean insertResultAsSecondArg, ArrayList returnCols){
+    colNameList = new ArrayList(bsh.shared.colNameList.get(tableName));
+
+//	System.out.println(&quot;RowOne: &quot; + rowsOne + &quot;\nRowTwo: &quot; + rowsTwo);
+    boolean status = true;
+    if(rowsOne.size() == 0){
+        response = response.concat(&quot;COMPARING WITH EMPTY SET!\n&quot;);
+        System.out.println(&quot;COMPARING WITH EMPTY SET!&quot;);
+    }
+
+	for(ArrayList rowOne: rowsOne){
+     	boolean present=false;
+        	for(ArrayList rowTwo: rowsTwo){
+   		     temp = new ArrayList();
+		     if(insertResultAsSecondArg){
+		     	for(String colName: returnCols){
+		          	temp.add(rowTwo.get(colNameList.indexOf(colName)));
+		          }
+			}
+		     else{
+		     	temp.addAll(rowTwo);
+		     }
+			boolean same = compareRow(rowOne, temp, returnCols);
+			if(!same){
+               	continue;
+            	}
+            	else{
+               	response = response.concat(&quot;Matched! =&gt; Row: &quot; + rowOne + &quot;\n&quot;);
+                	present=true;
+                	break;
+            	}
+        }
+        if(!present){
+            response = response.concat(&quot;UNMATCHED! =&gt; Row: &quot; + rowOne + &quot;\n&quot;);
+            status = false;
+        }
+    	}
+    	setResponse();
+	return status;
+}
+
+Connection txnl = DataSourceElement.getConnection(${TXNL});
+System.out.println(&quot;Connection established to transactional&quot;);
+Connection sec = DataSourceElement.getConnection(${SECONDARY});
+System.out.println(&quot;Connection established to secondary&quot;);
+Statement stmtTxnl = txnl.createStatement();
+Statement stmtSec = sec.createStatement();
+String csvTxnl = ${SELECT_FILE_TXNL};
+String csvSec = ${SELECT_FILE_SEC};
+String lineTxnl = &quot;&quot;;
+String lineSec = &quot;&quot;;
+String cvsSplitBy = &quot;,&quot;;
+int count = 0;
+results = new ArrayList();
+brTxnl = new BufferedReader(new FileReader(csvTxnl));
+brSec = new BufferedReader(new FileReader(csvSec));
+while (((lineTxnl = brTxnl.readLine()) != null) &amp;&amp; ((lineSec = brSec.readLine()) != null)) {
+    try{
+        String[] contentTxnl = lineTxnl.split(${TESTCASE_SEPARATOR});
+        String[] contentSec = lineSec.split(${TESTCASE_SEPARATOR});
+//		System.out.println(lineTxnl);
+//		System.out.println(lineSec);
+        
+        ResultSet resultSec = stmtSec.executeQuery(contentSec[1]);
+        ResultSet resultTxnl = stmtTxnl.executeQuery(contentTxnl[1]);
+
+        tableName = contentTxnl[0];
+//		System.out.println(&quot;-----------&quot; + tableName + &quot;-----------\n&quot;);
+        returnCols = new ArrayList();
+        if(bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;).size() == 0){
+            for(String colName: bsh.shared.colNameList.get(tableName)){
+                returnCols.add(colName);
+            }
+        }
+        else{
+            for(String colName: bsh.shared.tableMetaData.get(tableName).get(&quot;ReturnColumns&quot;)){
+                returnCols.add(colName);
+            }
+        }
+//      System.out.println(&quot;ReturnColumns: &quot; + returnCols);
+
+        response = response.concat(&quot;For table: &quot; + tableName + &quot;\nQuery: &quot; + contentTxnl[1]+&quot;\n&quot;);
+//      System.out.println(&quot;Processing master result&quot;);      
+        ArrayList rowsTxnl = processResultSet(resultTxnl, returnCols, false);
+//      System.out.println(&quot;ResultSet of master processed&quot;);
+        ArrayList rowsSec = processResultSet(resultSec, returnCols, true);
+        response = response.concat(&quot;Comparing master result and insert data\n&quot;);
+        boolean one = compareResults(rowsTxnl, bsh.shared.insertResult.get(tableName).get(bsh.shared.queryValues.get(count)), true, returnCols);
+        response = response.concat((one)?&quot;Master and Insert data matches!\n&quot; : &quot;Master and Insert data DO NOT match\n&quot;);
+        response = response.concat(&quot;-----------------------\nComparing master result and replica data\n&quot;);
+        boolean two = compareResults(rowsTxnl, rowsSec, false, returnCols);
+        response = response.concat((two)?&quot;Master and Replica data matches!\n&quot; : &quot;Master and Replica data DO NOT match\n&quot;);
+        response = response.concat((one &amp;&amp; two)?&quot;Query execution successfully!\n&quot; : &quot;Query failed!\n&quot;);
+        results.add(one &amp;&amp; two);
+        response = response.concat(&quot;-----------------------\n-----------------------\n&quot;);
+        setResponse();
+//      System.out.println(&quot;Rows: &quot; + rowsMaster);
+//      System.out.println(&quot;Rows: &quot; + rowsReplica);
+    }
+    catch(Exception e){
+        System.out.println(&quot;Error: &quot; + e);
+//      e.printStackTrace();
+        IsSuccess = false;
+        results.add(false);
+    }
+    finally{
+    	count++;
+    }
+
+}
+for(int i=0; i&lt;results.size();i++){
+    IsSuccess = IsSuccess &amp;&amp; results.get(i);
+    response = response.concat(&quot;Query &quot;+i+&quot;:&quot;+results.get(i)+&quot;\n&quot;);
+    System.out.println(&quot;Query &quot;+i+&quot;:&quot;+results.get(i));
+}
+setResponse();
+stmtTxnl.close();
+stmtSec.close();
+txnl.close();
+sec.close();
+System.out.println(&quot;--------------------\nValidation Phase Completed\n--------------------\n&quot;);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">10000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+        </hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="clear" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.*;
+import java.lang.Math.*;
+import java.lang.Integer;
+import java.lang.Long;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+System.out.println(&quot;--------------------\nDelete Phase\n--------------------\n&quot;);
+
+String tableName = &quot;&quot;;
+PreparedStatement stmt = null;
+String sql = null;
+
+colListIndex = new ArrayList();
+dataTypeList = new ArrayList();
+
+generateColList(){
+	colList = new HashSet();
+	colList.add(tableMetaData.get(tableName).get(${SHARDINGKEY}));
+	colList.addAll(tableMetaData.get(tableName).get(${PRIMARYKEY}));
+	return colList;
+}
+
+prepareStmtSkeleton(ArrayList colList){
+	String initial = ${SQL_DELETE} + ${SQL_FROM_CLAUSE} + tableName + ${SQL_WHERE_CLAUSE};
+	String params = &quot;&quot;;
+	
+	for(int i=0; i&lt;colList.size(); i++){
+		params = params + colList.get(i) + ${EQUALS} + ${PREPARESTMT_SYMBOL} + ${SQL_AND_CLAUSE}; 
+	}
+	
+	params = params.substring(0, params.length() - ${SQL_AND_CLAUSE}.length());
+
+	return initial + params;
+}
+
+setData(ArrayList row, String dataType, int index, int place){
+	/*
+	 * Indexing for place in PreparedStatement starts from 1. Thus place++
+	 */
+	place++;
+	switch(dataType){
+     	case &quot;BIGINT&quot;:
+     		stmt.setLong(place, Long.parseLong(row.get(index)));
+        		break;
+		case &quot;INT&quot;:
+        	case &quot;BIT&quot;:
+        	case &quot;TINYINT&quot;:
+        		stmt.setInt(place, Integer.parseInt(row.get(index)));
+        		break;
+		case &quot;VARCHAR&quot;:
+        	  	stmt.setString(place, row.get(index));
+        		break;
+        	case &quot;DATETIME&quot;:
+            	stmt.setTimestamp(place, Timestamp.valueOf(row.get(index)));
+        		break;
+        	default:
+        		System.out.println(&quot;Missing case for data type in setData function: &quot; + dataType);
+    }
+}
+
+
+Connection conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+tableMetaData = bsh.shared.tableMetaData;
+try{
+	for(String tN: tableMetaData.keySet()){
+		tableName = tN;
+		System.out.println(&quot;-----------&quot; + tableName + &quot;-----------&quot;);
+		
+		colList = new ArrayList(generateColList());
+		if(colList.isEmpty()){
+			continue;
+		}
+		sql = prepareStmtSkeleton(colList);	
+		stmt=conn.prepareStatement(sql);
+		System.out.println(sql);	
+		colListIndex.clear();
+		dataTypeList.clear();
+		
+		for(String colName: colList){
+			colListIndex.add(bsh.shared.colNameList.get(tableName).indexOf(colName));
+		}
+		
+		for(String colName: colList){
+			dataTypeList.add(bsh.shared.tableMetaData.get(tableName).get(&quot;colDetails&quot;).get(colName).get(&quot;Type&quot;));
+		}
+//		System.out.println(&quot;Hi &quot; + colList + &quot;\n&quot; + dataTypeList + &quot;\n&quot; + colListIndex);
+		for(Map.Entry entry: bsh.shared.insertResult.get(tableName).entrySet()){
+			for(int i=0; i &lt; entry.getValue().size(); i++){
+				int place=0;
+				for(; place&lt;dataTypeList.size(); place++){
+					setData(entry.getValue().get(i), dataTypeList.get(place), colListIndex.get(place), place);
+				}
+				try
+				{
+					stmt.executeUpdate();
+				}
+				catch (SQLException e){
+					System.out.println(&quot;Error: &quot; + e.getMessage());
+					IsSuccess=false;
+				}
+			}
+		}
+	}
+}
+catch(Exception e){
+	IsSuccess=false;
+	System.out.println(e);
+}
+System.out.println(&quot;--------------------\nDelete Phase Completed\n--------------------\n&quot;);	
+
+stmt.close();
+conn.close();</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

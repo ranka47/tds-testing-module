@@ -855,7 +855,7 @@ processInput(ArrayList input){
 }
 
 generateSQL(ArrayList processedInput, HashMap tableDetails, int count){
-	String initial = ${SQL_SELECT} + ${SELECT_STAR} + ${SQL_FROM_CLAUSE} + tableName;
+	String initial = ${SQL_SELECT} + ${SELECT_STAR} + ${SQL_FROM_CLAUSE} + vars.get(&quot;DBNAME&quot;) + ${DEREFERENCE} + tableName;
 	String columnName = ${SQL_WHERE_CLAUSE};
 
 	for(int i=0; i&lt;processedInput.size(); i+=2){

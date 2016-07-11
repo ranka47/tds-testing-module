@@ -1,6 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,grpThreads,allThreads,Latency,IdleTime
-1468223829035,15,init,500,org.apache.jorphan.util.JMeterException: Error invoking bsh method: eval	Sourced file: inline evaluation of: ``bsh.shared.tableMetaData = new HashMap(); bsh.shared.autoIncrement = new HashMap . . . '' : Object constructor,perfPrepPhase 1-1,text,false,,0,1,1,0,0
-1468223829051,51,vschemaExtractor,200,OK,perfPrepPhase 1-1,text,true,,0,1,1,0,0
-1468223829102,2187,extractMetaData,200,OK,perfPrepPhase 1-1,text,true,,0,1,1,0,0
-1468223831306,57,BeanShell Sampler,200,OK,perfSelectGenQuery 2-1,text,false,,0,1,1,0,0
-1468223831821,78,BeanShell Sampler,200,OK,perfSelectGenQuery 2-2,text,false,,0,1,1,0,0
