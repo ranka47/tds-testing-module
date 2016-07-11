@@ -960,7 +960,6 @@ for(String tN: bsh.shared.tableMetaData.keySet()){
 		catch (SQLException e){
 			System.out.println(&quot;Row &quot;+ i + &quot;: Insert Failed!&quot;);			
 			System.out.println(&quot;Check the log for error&quot;);
-			SampleResult.setResponseCode(501);
 			log.error(e.getMessage());
 		   	IsSuccess=false;
 		}

@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="TDS - Automation Testing Module" enabled="true">
+      <stringProp name="TestPlan.comments">testCase1: select [returnColumns, | * ] from tableName [where where_exp_with_and]</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="CHARLIST" elementType="Argument">
+            <stringProp name="Argument.name">CHARLIST</stringProp>
+            <stringProp name="Argument.value">&quot;abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INTEGER" elementType="Argument">
+            <stringProp name="Argument.name">INTEGER</stringProp>
+            <stringProp name="Argument.value">0123456789</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
+            <stringProp name="Argument.value">${__P(datasize,5)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MACHINE" elementType="Argument">
+            <stringProp name="Argument.name">MACHINE</stringProp>
+            <stringProp name="Argument.value">txnl</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DBNAME" elementType="Argument">
+            <stringProp name="Argument.name">DBNAME</stringProp>
+            <stringProp name="Argument.value">shipment</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTGIVEN" elementType="Argument">
+            <stringProp name="Argument.name">INPUTGIVEN</stringProp>
+            <stringProp name="Argument.value">${__P(inputgiven,n)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INPUTFILE" elementType="Argument">
+            <stringProp name="Argument.name">INPUTFILE</stringProp>
+            <stringProp name="Argument.value">${__P(inputfile,&quot;testCases/queryNReturnCols.csv&quot;)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TESTCASE_FILE" elementType="Argument">
+            <stringProp name="Argument.name">TESTCASE_FILE</stringProp>
+            <stringProp name="Argument.value">&quot;testCases/perfSelect.csv&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IGNORETABLES" elementType="Argument">
+            <stringProp name="Argument.name">IGNORETABLES</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/ignoreTables.csv&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtTxnl.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_FILE_SEC" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_FILE_SEC</stringProp>
+            <stringProp name="Argument.value">&quot;tmp/selectStmtSec.sql&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VSCHEMAFILE" elementType="Argument">
+            <stringProp name="Argument.name">VSCHEMAFILE</stringProp>
+            <stringProp name="Argument.value">&quot;shipmentVSchema.json&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIGINT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIGINT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">63</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TINYINT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">TINYINT_RANGE</stringProp>
+            <stringProp name="Argument.value">256</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="INT_BIT_RANGE" elementType="Argument">
+            <stringProp name="Argument.name">INT_BIT_RANGE</stringProp>
+            <stringProp name="Argument.value">31</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREFIX_STRING" elementType="Argument">
+            <stringProp name="Argument.name">PREFIX_STRING</stringProp>
+            <stringProp name="Argument.value">&quot;TestData&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1970-01-01 00:00:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_IST" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_IST</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 23:59:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MIN_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MIN_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1969-12-31 18:30:00&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_MAX_UTC" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_MAX_UTC</stringProp>
+            <stringProp name="Argument.value">&quot;1980-01-01 18:29:59&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DATETIME_ACCU" elementType="Argument">
+            <stringProp name="Argument.name">DATETIME_ACCU</stringProp>
+            <stringProp name="Argument.value">1000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="IST_TO_UTC" elementType="Argument">
+            <stringProp name="Argument.name">IST_TO_UTC</stringProp>
+            <stringProp name="Argument.value">-19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="UTC_TO_IST" elementType="Argument">
+            <stringProp name="Argument.name">UTC_TO_IST</stringProp>
+            <stringProp name="Argument.value">19800000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX</stringProp>
+            <stringProp name="Argument.value">&quot;vindex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEC_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">SEC_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;secIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NON_INDEX" elementType="Argument">
+            <stringProp name="Argument.name">NON_INDEX</stringProp>
+            <stringProp name="Argument.value">&quot;nonIndex&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PRIMARYKEY" elementType="Argument">
+            <stringProp name="Argument.name">PRIMARYKEY</stringProp>
+            <stringProp name="Argument.value">&quot;pk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SHARDINGKEY" elementType="Argument">
+            <stringProp name="Argument.name">SHARDINGKEY</stringProp>
+            <stringProp name="Argument.value">&quot;sk&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HOSTNAME_SECONDARY" elementType="Argument">
+            <stringProp name="Argument.name">HOSTNAME_SECONDARY</stringProp>
+            <stringProp name="Argument.value">ekart-tds-aesop2.nm.flipkart.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="HOSTNAME_TXNL" elementType="Argument">
+            <stringProp name="Argument.name">HOSTNAME_TXNL</stringProp>
+            <stringProp name="Argument.value">ekart-tds-0001.nm.flipkart.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DRIVER_CLASS" elementType="Argument">
+            <stringProp name="Argument.name">DRIVER_CLASS</stringProp>
+            <stringProp name="Argument.value">com.flipkart.polyglot.jdbc.PolyglotDriver</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TESTCASE_SEPARATOR" elementType="Argument">
+            <stringProp name="Argument.name">TESTCASE_SEPARATOR</stringProp>
+            <stringProp name="Argument.value">&quot;;&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PARAMETER_SEPARATOR" elementType="Argument">
+            <stringProp name="Argument.name">PARAMETER_SEPARATOR</stringProp>
+            <stringProp name="Argument.value">&quot;,&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SELECT_STAR" elementType="Argument">
+            <stringProp name="Argument.name">SELECT_STAR</stringProp>
+            <stringProp name="Argument.value">&quot;*&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_AND_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_AND_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; and &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_WHERE_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_WHERE_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; where &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_VALUES_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_VALUES_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; values &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_SELECT" elementType="Argument">
+            <stringProp name="Argument.name">SQL_SELECT</stringProp>
+            <stringProp name="Argument.value">&quot; select &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_FROM_CLAUSE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_FROM_CLAUSE</stringProp>
+            <stringProp name="Argument.value">&quot; from &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_INSERT" elementType="Argument">
+            <stringProp name="Argument.name">SQL_INSERT</stringProp>
+            <stringProp name="Argument.value">&quot; insert into &quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BRACKET_OPEN" elementType="Argument">
+            <stringProp name="Argument.name">BRACKET_OPEN</stringProp>
+            <stringProp name="Argument.value">&quot;(&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BRACKET_CLOSE" elementType="Argument">
+            <stringProp name="Argument.name">BRACKET_CLOSE</stringProp>
+            <stringProp name="Argument.value">&quot;)&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PREPARESTMT_SYMBOL" elementType="Argument">
+            <stringProp name="Argument.name">PREPARESTMT_SYMBOL</stringProp>
+            <stringProp name="Argument.value">&quot;?&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="EQUALS" elementType="Argument">
+            <stringProp name="Argument.name">EQUALS</stringProp>
+            <stringProp name="Argument.value">&quot;=&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TO_DATE_FUNC" elementType="Argument">
+            <stringProp name="Argument.name">TO_DATE_FUNC</stringProp>
+            <stringProp name="Argument.value">&quot;TO_DATE&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="STR_DATETIME_APOST" elementType="Argument">
+            <stringProp name="Argument.name">STR_DATETIME_APOST</stringProp>
+            <stringProp name="Argument.value">&quot;&apos;&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SQL_DELETE" elementType="Argument">
+            <stringProp name="Argument.name">SQL_DELETE</stringProp>
+            <stringProp name="Argument.value">&quot; delete&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DEREFERENCE" elementType="Argument">
+            <stringProp name="Argument.name">DEREFERENCE</stringProp>
+            <stringProp name="Argument.value">&quot;.&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TXNL" elementType="Argument">
+            <stringProp name="Argument.name">TXNL</stringProp>
+            <stringProp name="Argument.value">&quot;txnl&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SECONDARY" elementType="Argument">
+            <stringProp name="Argument.name">SECONDARY</stringProp>
+            <stringProp name="Argument.value">&quot;sec&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="QUERYTYPE" elementType="Argument">
+            <stringProp name="Argument.name">QUERYTYPE</stringProp>
+            <stringProp name="Argument.value">delete</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="VINDEX_UNIQUE" elementType="Argument">
+            <stringProp name="Argument.name">VINDEX_UNIQUE</stringProp>
+            <stringProp name="Argument.value">&quot;vindexUnique&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="NUM_OF_THREADS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(threads,2)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Master TDS" enabled="true">
+        <stringProp name="dataSource">master</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">false</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=master</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Slave TDS" enabled="true">
+        <stringProp name="dataSource">slave</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">false</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl&amp;TABLET_TYPE=replica</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS and specific to MASTER MySQL instance</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Transactional Data Store" enabled="true">
+        <stringProp name="dataSource">txnl</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">show tables</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=txnl</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="Secondary Data Store" enabled="true">
+        <stringProp name="dataSource">sec</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="checkQuery">select * from dummy</stringProp>
+        <stringProp name="dbUrl">jdbc:polyglot://txnstore:${HOSTNAME_TXNL}:15991@archivalstore:${HOSTNAME_SECONDARY}:2181:hbase/shipment/shipment?dataStoreType=archival</stringProp>
+        <stringProp name="driver">${DRIVER_CLASS}</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="TestPlan.comments">Connect configuration for local TDS</stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">pSelect.output</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.listener.GraphsGeneratorListener guiclass="TestBeanGUI" testclass="kg.apc.jmeter.listener.GraphsGeneratorListener" testname="jp@gc - Graphs Generator" enabled="true">
+        <boolProp name="aggregateRows">false</boolProp>
+        <boolProp name="autoScaleRows">true</boolProp>
+        <stringProp name="endOffset"></stringProp>
+        <stringProp name="excludeLabels"></stringProp>
+        <boolProp name="excludeSamplesWithRegex">false</boolProp>
+        <intProp name="exportMode">2</intProp>
+        <stringProp name="filePrefix">pSelect</stringProp>
+        <stringProp name="forceY"></stringProp>
+        <stringProp name="granulation">5000</stringProp>
+        <intProp name="graphHeight">800</intProp>
+        <intProp name="graphWidth">1200</intProp>
+        <stringProp name="includeLabels"></stringProp>
+        <boolProp name="includeSamplesWithRegex">false</boolProp>
+        <stringProp name="limitRows">150</stringProp>
+        <stringProp name="lineWeight"></stringProp>
+        <stringProp name="lowCountLimit"></stringProp>
+        <stringProp name="outputBaseFolder"></stringProp>
+        <boolProp name="paintGradient">true</boolProp>
+        <boolProp name="paintZeroing">true</boolProp>
+        <boolProp name="preventOutliers">false</boolProp>
+        <boolProp name="relativeTimes">false</boolProp>
+        <stringProp name="resultsFileName">pSelect.output</stringProp>
+        <stringProp name="startOffset"></stringProp>
+        <stringProp name="successFilter"></stringProp>
+      </kg.apc.jmeter.listener.GraphsGeneratorListener>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="perfPrepPhase" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1465147238000</longProp>
+        <longProp name="ThreadGroup.end_time">1465147238000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="init" enabled="true">
+          <stringProp name="BeanShellSampler.query">bsh.shared.tableMetaData = new HashMap();
+bsh.shared.autoIncrement = new HashMap();
+bsh.shared.testCases = new ArrayList();
+bsh.shared.dataTypes = new ArrayList();
+bsh.shared.tableName = new ArrayList();
+bsh.shared.values = new ArrayList();
+bsh.shared.ignoreTables = new ArrayList();
+
+bsh.shared.acceptableColTypes = new ArrayList();
+bsh.shared.acceptableColTypes.add(${SHARDINGKEY});
+bsh.shared.acceptableColTypes.add(${VINDEX_UNIQUE});
+
+bsh.shared.mutableColTypes = new ArrayList();
+bsh.shared.mutableColTypes.add(${NON_INDEX});
+bsh.shared.mutableColTypes.add(${SEC_INDEX});
+//bsh.shared.mutableColTypes.add(${PRIMARYKEY});	//works but not supported as not the use-case
+
+br = new BufferedReader(new FileReader(${IGNORETABLES}));
+while((line = br.readLine()) != null){
+	bsh.shared.ignoreTables.add(line);
+}</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="vschemaExtractor" enabled="true">
+          <stringProp name="BeanShellSampler.query">import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
+/*
+ * Sharing Key Index Type ArrayList
+ */
+shardingKeyIndexType = new ArrayList();
+shardingKeyIndexType.add(&quot;hash&quot;);
+shardingKeyIndexType.add(&quot;binarymd5&quot;);
+shardingKeyIndexType.add(&quot;unicodeloosemd5&quot;);
+
+/*
+ * VIndexUnique Type ArrayList
+ */
+vindexUniqueType = new ArrayList();
+vindexUniqueType.add(&quot;lookup_hash_unique&quot;);
+
+String tableName = &quot;&quot;;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(new FileReader(${VSCHEMAFILE}));
+JSONObject jsonObject = (JSONObject) obj;
+JSONObject shardingKey = new JSONObject();
+
+vindex = new HashMap();
+vindexUnique = new HashMap();
+
+boolean shardedStatus = jsonObject.get(&quot;sharded&quot;);
+JSONObject tables = jsonObject.get(&quot;tables&quot;);
+JSONObject vindexes = jsonObject.get(&quot;vindexes&quot;);
+Iterator keys = tables.keySet().iterator();
+
+getColumnVindexes(JSONObject tableDetails){
+	vindex.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(shardingKeyIndexType.contains(type)){
+//			System.out.println(&quot;TableName&quot; + vindexes.get(obj.get(&quot;name&quot;)));
+			shardingKey.put(tableName, tableObj.get(&quot;column&quot;));
+		}
+		else{
+			vindex.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+    }
+    
+}
+
+getColumnUniqueVindexes(JSONObject tableDetails){
+	vindexUnique.put(tableName, new ArrayList());
+	for(Object tableObj: tableDetails.get(&quot;column_vindexes&quot;)){
+//		System.out.println(&quot;TableName &quot; + vindexes.get(obj.get(&quot;name&quot;)));
+		String type = vindexes.get(tableObj.get(&quot;name&quot;)).get(&quot;type&quot;);
+		if(vindexUniqueType.contains(type)){
+			vindexUnique.get(tableName).add(tableObj.get(&quot;column&quot;));
+		}
+	}
+}
+
+getAutoIncrement(JSONObject tableDetails){
+	/*
+	 * Written with the assumption that at max only one auto_increment column will be defined
+	 */
+	 try{
+	 	String colName = tableDetails.get(&quot;auto_increment&quot;).get(&quot;column&quot;);
+	 	hashSet = new HashSet();
+	 	hashSet.add(colName);
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+	 catch(Exception e){
+		hashSet = new HashSet();
+	 	bsh.shared.autoIncrement.put(tableName, hashSet);
+	 }
+
+}
+
+getValues(String tableName){
+    	getColumnVindexes(tables.get(tableName));
+//  	getAutoIncrement(tables.get(tableName));
+	getColumnUniqueVindexes(tables.get(tableName));	
+}
+
+if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;n&quot;)){
+	while(keys.hasNext()) {
+		tableName = (String)keys.next();
+		if(bsh.shared.ignoreTables.contains(tableName)){
+			continue;	
+		}
+		getValues(tableName);
+	}
+}
+else if(vars.get(&quot;INPUTGIVEN&quot;).equals(&quot;y&quot;)){
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	try{
+		br = new BufferedReader(new FileReader(vars.get(&quot;INPUTFILE&quot;)));
+		while((line = br.readLine()) != null){
+			tableName = line;
+			if(bsh.shared.ignoreTables.contains(tableName)){
+				continue;	
+			}
+			getValues(tableName);	
+		}
+	}
+	catch(Exception e){
+		System.out.println(e.getMessage());
+		log.error(e.getMessage());
+		IsSuccess = false;
+	}
+	
+}
+else{
+	System.out.println(&quot;Argument for option: inputgiven is not valid!&quot;);
+}
+
+bsh.shared.vindex = vindex;
+bsh.shared.shardingKey = shardingKey;
+bsh.shared.vindexUnique = vindexUnique;
+System.out.println(&quot;SKs &quot; + shardingKey);
+System.out.println(&quot;Vindex &quot; + vindex);
+System.out.println(&quot;IgnoreColumns: &quot; + bsh.shared.autoIncrement);
+System.out.println(&quot;vindexUnique: &quot; + vindexUnique);</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="extractMetaData" enabled="true">
+          <stringProp name="TestPlan.comments">Initialises the object in which the meta data of all the tables will be stored:  </stringProp>
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.util.*;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+generateColNameList(int colCount, HashMap colLevel){
+	colNameList = new ArrayList(colCount);
+	for(int i=0; i&lt;colCount;i++){
+		colNameList.add(null);
+	}
+	for(String colName: colLevel.keySet()){
+		colNameList.set(colLevel.get(colName).get(&quot;ColumnNumber&quot;) - 1, colName);
+	}
+	return colNameList;
+}
+
+getPrimaryKeys(ResultSet rspk){
+	pk = new ArrayList();
+	while(rspk.next()){
+		try{
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));	
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int i=pk.size(); i&lt;rspk.getInt(&quot;KEY_SEQ&quot;); i++){
+				pk.add(null);
+			}
+			pk.set(rspk.getInt(&quot;KEY_SEQ&quot;) - 1, rspk.getString(&quot;COLUMN_NAME&quot;));
+			//System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+		catch(Exception e){
+			System.out.println(&quot;Error: &quot; + e.getMessage());
+		}
+	}
+	return pk;
+}
+
+getSecondaryIndexes(ResultSet rsSecIndex){
+	secIndex = new ArrayList();
+	while(rsSecIndex.next()){
+		if(rsSecIndex.getString(&quot;INDEX_NAME&quot;).equals(&quot;PRIMARY&quot;)){
+			continue;
+		}
+		else{
+			secIndex.add(rsSecIndex.getString(&quot;COLUMN_NAME&quot;));
+		}
+	}
+	return secIndex;
+}
+
+getNonIndexes(ArrayList pk, ArrayList colNameList, ArrayList secIndex){
+	nonIndex = new ArrayList();
+	for(String colName: colNameList){
+		if(pk.contains(colName) || secIndex.contains(colName) || bsh.shared.vindex.get(tableName).contains(colName) || bsh.shared.shardingKey.get(tableName).equals(colName)){
+			continue;
+		}
+		else{
+			nonIndex.add(colName);
+		}
+	}
+	return nonIndex;
+}
+
+printResultSet(ResultSet rs){
+	ResultSetMetaData rsmd = rs.getMetaData();
+	int colCount = rsmd.getColumnCount();
+	while(rs.next()){
+		for (int i = 1; i &lt;= colCount; i++) {
+	        if (i &gt; 1) System.out.print(&quot;,  &quot;);
+	        System.out.print(rsmd.getColumnName(i) + &quot; &quot; + rs.getString(i));
+	
+	    }
+	        System.out.println(&quot;\n&quot;);
+	}
+}
+
+Connection conn;
+try{
+	String shardingKey = null; 
+	
+	BufferedReader br = null;
+	String line = &quot;&quot;;
+	conn = DataSourceElement.getConnection(vars.get(&quot;MACHINE&quot;));
+	System.out.println(&quot;Connection established!&quot;);
+	
+	DatabaseMetaData dbmd = conn.getMetaData();
+
+	for(String tN: bsh.shared.shardingKey.keySet()){
+		tableName = tN;
+		ResultSet rs = dbmd.getColumns(vars.get(&quot;DBNAME&quot;), null, tableName, null);
+		tableMetaData = bsh.shared.tableMetaData;
+		colLevel = new HashMap();
+		int colCount = 0;	
+		colNames = new ArrayList();
+		colTypes = new ArrayList();
+//		printResultSet(rs);	
+		System.out.println(&quot;--------------------&quot;+tableName+ &quot;--------------------&quot;);
+		
+		while(rs.next()){
+
+//Always declare new HashMap else use remove() method of hashMap. Because if clear() method is used then the element last added
+//will get copied as many times as the number of elements in colList due to addition of reference in the colList in add() method. 
+			int index = rs.getInt(&quot;ORDINAL_POSITION&quot;) - 1;
+			try{
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(IndexOutOfBoundsException e){
+				for(int i=colNames.size(); i&lt;=index; i++){
+					colNames.add(null);
+					colTypes.add(null);
+				}
+				colNames.set(index, rs.getString(&quot;COLUMN_NAME&quot;));
+				colTypes.set(index, rs.getString(&quot;TYPE_NAME&quot;));
+			}
+			catch(Exception e){
+				System.out.println(&quot;Error: &quot; + e.getMessage());
+			}
+			colCount++;
+		}
+		tableLevel = new HashMap();
+		tableLevel.put(&quot;ColNames&quot;, colNames);
+		tableLevel.put(&quot;ColTypes&quot;, colTypes);
+		tableLevel.put(&quot;ColCount&quot;, colCount);		
+		tableLevel.put(${SHARDINGKEY}, bsh.shared.shardingKey.get(tableName));
+
+		ResultSet rspk = dbmd.getPrimaryKeys(vars.get(&quot;DBNAME&quot;), null, tableName);		
+///		printResultSet(rspk);
+		pk = getPrimaryKeys(rspk);
+		tableLevel.put(${PRIMARYKEY}, pk);
+
+		ResultSet rsSecIndex = dbmd.getIndexInfo(vars.get(&quot;DBNAME&quot;), null, tableName, false, false);
+		secIndex = getSecondaryIndexes(rsSecIndex);
+		tableLevel.put(${SEC_INDEX}, secIndex);
+	
+		nonIndex = getNonIndexes(pk, colNames, secIndex);
+		tableLevel.put(${NON_INDEX}, nonIndex);
+		
+		tableMetaData.put(tableName,tableLevel);
+		bsh.shared.tableMetaData = tableMetaData;
+	}
+
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess=false;
+}
+finally{
+	conn.close();
+	System.out.println(&quot;Connection closed!&quot;);
+}
+System.out.println(&quot;metaData &quot; + bsh.shared.tableMetaData);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="perfDeleteGenQuery" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1467355981000</longProp>
+        <longProp name="ThreadGroup.end_time">1467355981000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.sql.*;
+import java.math.BigInteger;
+import org.apache.jmeter.protocol.jdbc.config.DataSourceElement;
+Random rand = new Random();
+String tableName = &quot;&quot;;
+
+getDataType(String colName){
+	int index = bsh.shared.tableMetaData.get(tableName).get(&quot;ColNames&quot;).indexOf(colName);
+	return bsh.shared.tableMetaData.get(tableName).get(&quot;ColTypes&quot;).get(index);
+}
+
+getColName(String colType){
+	colName = new ArrayList();
+	switch(colType){
+		case ${VINDEX}:
+			if(bsh.shared.vindex.get(tableName).size() != 0){
+				colName.add(bsh.shared.vindex.get(tableName).get(rand.nextInt(bsh.shared.vindex.get(tableName).size())));
+			}
+			break;
+		case ${SEC_INDEX}:
+			secIndex = bsh.shared.tableMetaData.get(tableName).get(${SEC_INDEX});
+			if(secIndex.size() != 0){
+				colName.add(secIndex.get(rand.nextInt(secIndex.size())));
+			}
+			break;
+		case ${NON_INDEX}:
+			nonIndex = bsh.shared.tableMetaData.get(tableName).get(${NON_INDEX});
+			if(nonIndex.size() != 0){
+				colName.add(nonIndex.get(rand.nextInt(nonIndex.size())));
+			}
+			break;
+		case ${SHARDINGKEY}:
+			colName.add(bsh.shared.shardingKey.get(tableName));
+			break;
+		case ${PRIMARYKEY}:
+			for(String pk: bsh.shared.tableMetaData.get(tableName).get(${PRIMARYKEY})){
+				colName.add(pk);
+			}
+			break;
+		case ${VINDEX_UNIQUE}:
+			if(bsh.shared.vindexUnique.get(tableName).size() != 0){
+				colName.add(bsh.shared.vindexUnique.get(tableName).get(rand.nextInt(bsh.shared.vindexUnique.get(tableName).size())));
+			}
+			break;
+		default:
+			System.out.println(&quot;Column Type: &quot; + colType + &quot; not supported!&quot;);
+	}
+	return colName;
+}
+
+getValue(String type, Integer count){
+//	System.out.println(type + count);
+	switch(type){
+     	case &quot;BIGINT&quot;:
+        	case &quot;INT&quot;:
+			return count.toString();
+        	case &quot;VARCHAR&quot;:
+            	return &quot;&apos;&quot;+${PREFIX_STRING} + count+&quot;&apos;&quot;;
+        	case &quot;TINYINT&quot;:
+            	return &quot;255&quot;;
+		case &quot;BIT&quot;:
+			return &quot;0&quot;;
+        	case &quot;DATETIME&quot;:
+			tmsp = new Timestamp((Timestamp.valueOf(${DATETIME_MIN_IST})).getTime() + count*1000);
+            	return &quot;&apos;&quot;+tmsp+&quot;&apos;&quot;;
+        default:
+            return &quot;Hi&quot;;
+    }
+}
+
+processInput(ArrayList input){
+	processedInput = new ArrayList();
+	boolean colAdded = false;
+	String colType = &quot;&quot;;
+	for(int i=0; i&lt;input.size(); i+=2){
+		if(!(bsh.shared.acceptableColTypes.contains(input.get(i)))){
+			continue;
+		}
+		colNames = new ArrayList(getColName(input.get(i)));
+		if(colNames.isEmpty()){
+			continue;
+		}
+		if(colAdded){
+			processedInput.add(input.get(i-1));	//adding the conjunction
+		}
+		if(colNames.size() == 1){
+			processedInput.add(colNames.get(0));	//adding ColName
+		}
+		else{
+			for(String colName: colNames){
+				processedInput.add(colName);	//adding each ColName
+				processedInput.add(&quot;and&quot;);	//as these columns form a tuple so need to join with and operator
+			}
+			processedInput.remove(processedInput.size() - 1); //remove the last conjunction added
+		}
+		colAdded = true;
+	}
+//	if(processedInput.size() &gt; 0){
+//		processedInput.remove(processedInput.size() - 1); //remove the last conjunction added
+//	}
+	return processedInput;
+}
+
+generateSQL(ArrayList processedInput, HashMap tableDetails, int count){
+	String initial = ${SQL_DELETE} + ${SQL_FROM_CLAUSE} + tableName;
+	String columnName = ${SQL_WHERE_CLAUSE};
+
+	for(int i=0; i&lt;processedInput.size(); i+=2){
+		String colName = processedInput.get(i);
+		String conjunction = (i != (processedInput.size() - 1)) ? processedInput.get(i+1) : &quot;&quot;;
+	   	value =  getValue(getDataType(colName), count);
+	   	columnName = columnName + colName + ${EQUALS} + value + &quot; &quot; + conjunction + &quot; &quot;;
+	}
+	return initial + columnName;
+}
+try{
+	int threadNum = ${__threadNum};
+	fw = new FileWriter(vars.get(&quot;QUERYTYPE&quot;) + threadNum +&quot;.sql&quot;, false);
+	bw = new BufferedWriter(fw);
+	out = new PrintWriter(bw);
+	
+	br = new BufferedReader(new FileReader(${TESTCASE_FILE}));
+	while((line = br.readLine()) != null){
+		for(String tN: bsh.shared.tableMetaData.keySet()){
+			tableName = tN;
+			input = new ArrayList(Arrays.asList(line.split(${TESTCASE_SEPARATOR})));
+//			System.out.println(&quot;input &quot; + input);
+			if((input.size()%2) == 0){
+				System.out.println(&quot;Input &quot; + line + &quot; is not valid!&quot;);
+				continue;
+			}
+			processedInput = processInput(input);
+			if(processedInput.isEmpty()){
+				continue;
+			}
+//			System.out.println(&quot;processedInput&quot; + processedInput);
+			for(int i=0; i&lt; ${NUM_OF_TESTROWS}; i++){
+				String sql = generateSQL(processedInput, bsh.shared.tableMetaData.get(tableName), i + (threadNum - 1)*${NUM_OF_TESTROWS});
+//				String sql = generateSQL(tableName, bsh.shared.tableMetaData.get(tableName), i);
+//				System.out.println(sql);
+				out.println(tableName + &quot;~&quot; + line + &quot;~&quot; + sql);
+			}
+		}
+	}
+	out.close();
+}
+catch(Exception e){
+	System.out.println(e);
+	IsSuccess = false;
+}
+finally{
+}
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="perfDelete" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1467094816000</longProp>
+        <longProp name="ThreadGroup.end_time">1467094816000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">~</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">${__eval(${QUERYTYPE}${__threadNum}.sql)}</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">true</boolProp>
+            <stringProp name="variableNames">tableName,input,query</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="delete-${tableName}-${input}" enabled="true">
+            <stringProp name="dataSource">${MACHINE}</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">${query}</stringProp>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="queryTimeout">10</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
