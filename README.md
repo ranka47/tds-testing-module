@@ -59,6 +59,7 @@ Performance testing module for `update` statements.
 ***
 
 `modules/` : Contains all the modules that can be plugged in any custom test case for their required purpose. 
+
 `connectionConfig/` : Contains all the connection elements. Can be plugged in any custom test cases to be used to establish connection
-`testCases/` : 
+
 `tmp/` : Not in the repository but gets formed while executing a testcase. It contains all the intermediate files that are formed during the execution of the testcase.

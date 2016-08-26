@@ -58,4 +58,5 @@ Options for expression type:
   * `expression` : It will create an expression for the column
 
 It will create appropriate expression for all the column types that have been specified for updation. 
+
 **NOTE**: It will create same expression type for all the column types.
