@@ -17,6 +17,11 @@
             <stringProp name="Argument.value">0123456789</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="NUM_OF_THREADS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(threads,2)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="NUM_OF_TESTROWS" elementType="Argument">
             <stringProp name="Argument.name">NUM_OF_TESTROWS</stringProp>
             <stringProp name="Argument.value">${__P(datasize,5)}</stringProp>
@@ -270,11 +275,6 @@
           <elementProp name="VINDEX_UNIQUE" elementType="Argument">
             <stringProp name="Argument.name">VINDEX_UNIQUE</stringProp>
             <stringProp name="Argument.value">&quot;vindexUnique&quot;</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="NUM_OF_THREADS" elementType="Argument">
-            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
-            <stringProp name="Argument.value">${__P(threads,2)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
